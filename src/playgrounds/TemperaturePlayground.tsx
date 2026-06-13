@@ -51,7 +51,7 @@ export default function TemperaturePlayground() {
           <div key={c.token} style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '5px 0' }}>
             <span style={{ width: 80, fontFamily: 'var(--mono)', fontSize: 13, color: 'var(--text-dim)' }}>{c.token}</span>
             <div style={{ flex: 1, background: 'var(--panel-bg-2)', borderRadius: 4, height: 18, overflow: 'hidden' }}>
-              <motion.div animate={{ width: `${probs[i] * 100}%` }} transition={{ duration: 0.3 }}
+              <motion.div animate={{ width: `${probs[i] * 100}%` }} transition={{ duration: 0.3, ease: [0.2, 0, 0.38, 0.9] }}
                 style={{ height: '100%', background: i === 0 ? 'var(--c-blue)' : 'var(--c-purple)' }} />
             </div>
             <span style={{ width: 50, fontFamily: 'var(--mono)', fontSize: 12, textAlign: 'right', color: 'var(--text-dim)' }}>{(probs[i] * 100).toFixed(1)}%</span>

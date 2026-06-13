@@ -61,7 +61,7 @@ export default function RnnMemoryLab() {
                     <motion.path key={`${a}-${b}`}
                       d={`M ${x(a)} ${y} Q ${(x(a)+x(b))/2} ${y - 50 - Math.abs(b-a)*4} ${x(b)} ${y}`}
                       fill="none" stroke="var(--c-green)" strokeOpacity={0.28} strokeWidth={1}
-                      initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5 }} />
+                      initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, ease: [0.2, 0, 0.38, 0.9] }} />
                   );
                 })
               )}

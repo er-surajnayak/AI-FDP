@@ -49,7 +49,7 @@ export default function SelfAttentionPlayground() {
               <motion.path key={j}
                 d={`M ${x1} ${baseY - 14} Q ${midX} ${arcH} ${x2} ${baseY - 14}`}
                 fill="none" stroke="var(--c-blue)" strokeWidth={1 + w * 11} strokeOpacity={0.25 + w * 0.7}
-                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4 }} />
+                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4, ease: [0.2, 0, 0.38, 0.9] }} />
             );
           })}
           {tokens.map((tok, i) => {

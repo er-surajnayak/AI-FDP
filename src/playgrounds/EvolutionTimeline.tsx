@@ -56,7 +56,7 @@ export default function EvolutionTimeline() {
           <motion.div
             style={{ position: 'absolute', top: 31, left: 0, height: 2, background: era.color }}
             animate={{ width: `${(i / (ERAS.length - 1)) * 100}%` }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.4, ease: [0.2, 0, 0.38, 0.9] }}
           />
           <div style={{ position: 'absolute', inset: 0, display: 'flex', justifyContent: 'space-between' }}>
             {ERAS.map((e, idx) => (
@@ -81,7 +81,7 @@ export default function EvolutionTimeline() {
           <motion.div
             key={era.title}
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.25, ease: [0.2, 0, 0.38, 0.9] }}
             style={{ marginTop: '1.25rem', padding: '1.25rem', border: `1px solid var(--border)`, borderTop: `3px solid ${era.color}`, borderRadius: 10, background: 'var(--panel-bg)' }}
           >
             <h3 style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', margin: '0 0 0.75rem', color: era.color }}>{era.title}</h3>
