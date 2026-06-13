@@ -75,11 +75,11 @@ export default function TemperaturePlayground() {
         {CANDIDATES.map((c, i) => (
           <div key={c.token} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0' }}>
             <span style={{ width: 80, fontSize: 13, fontFamily: 'monospace' }}>{c.token}</span>
-            <div style={{ flex: 1, background: '#393939', borderRadius: 3, height: 18, overflow: 'hidden' }}>
+            <div style={{ flex: 1, background: 'var(--cds-layer-02, #e8e8e8)', borderRadius: 3, height: 18, overflow: 'hidden' }}>
               <motion.div
                 animate={{ width: `${probs[i] * 100}%` }}
                 transition={{ duration: 0.3 }}
-                style={{ height: '100%', background: i === 0 ? '#4589ff' : '#a56eff' }}
+                style={{ height: '100%', background: i === 0 ? 'var(--accent)' : '#8a3ffc' }}
               />
             </div>
             <span style={{ width: 48, fontSize: 12, textAlign: 'right', opacity: 0.8 }}>

@@ -1,18 +1,8 @@
 import type { ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  Header,
-  HeaderName,
-  HeaderGlobalBar,
-  HeaderGlobalAction,
-  SideNav,
-  SideNavItems,
-  SideNavLink,
-  SideNavDivider,
-  Content,
-} from '@carbon/react';
-import { Sun, Moon } from '@carbon/icons-react';
-import { MODULES } from '../content/loader';
+import { Button } from '@carbon/react';
+import { Light, Asleep, Continue } from '@carbon/icons-react';
+import { CORE_MODULES, RESOURCE_DOCS, OVERVIEW } from '../content/loader';
 
 export default function AppShell({
   theme,
@@ -25,56 +15,74 @@ export default function AppShell({
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  const moduleItems = MODULES.filter((m) => m.slug.startsWith('module-') || m.slug === 'overview');
-  const extraItems = MODULES.filter((m) => !m.slug.startsWith('module-') && m.slug !== 'overview');
+  const active = (slug: string) => pathname === `/${slug}`;
 
   return (
-    <>
-      <Header aria-label="D.I. Notes — Generative AI FDP">
-        <HeaderName prefix="D.I. Notes" href="#/overview" onClick={(e) => { e.preventDefault(); navigate('/overview'); }}>
-          Generative AI · FDP
-        </HeaderName>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label={theme === 'g100' ? 'Switch to light theme' : 'Switch to dark theme'}
+    <div className="difp-shell">
+      {/* Top bar */}
+      <header className="difp-topbar">
+        <button className="difp-brand" onClick={() => navigate('/')}>
+          <span className="difp-brand__mark">DI</span>
+          <span className="difp-brand__text">
+            <strong>D.I. Notes</strong>
+            <small>Generative AI · FDP</small>
+          </span>
+        </button>
+        <div className="difp-topbar__actions">
+          <Button
+            kind="ghost"
+            size="sm"
+            hasIconOnly
+            iconDescription={theme === 'g100' ? 'Light theme' : 'Dark theme'}
+            tooltipPosition="bottom"
+            renderIcon={theme === 'g100' ? Light : Asleep}
             onClick={onToggleTheme}
-            tooltipAlignment="end"
-          >
-            {theme === 'g100' ? <Sun size={20} /> : <Moon size={20} />}
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
-      </Header>
+          />
+        </div>
+      </header>
 
-      <SideNav aria-label="Module navigation" isFixedNav expanded isChildOfHeader isPersistent>
-        <SideNavItems>
-          {moduleItems.map((m) => (
-            <SideNavLink
-              key={m.slug}
-              href={`#/${m.slug}`}
-              isActive={pathname === `/${m.slug}`}
-              onClick={(e: React.MouseEvent) => { e.preventDefault(); navigate(`/${m.slug}`); }}
-            >
-              {m.navLabel}
-            </SideNavLink>
-          ))}
-          <SideNavDivider />
-          {extraItems.map((m) => (
-            <SideNavLink
-              key={m.slug}
-              href={`#/${m.slug}`}
-              isActive={pathname === `/${m.slug}`}
-              onClick={(e: React.MouseEvent) => { e.preventDefault(); navigate(`/${m.slug}`); }}
-            >
-              {m.navLabel}
-            </SideNavLink>
-          ))}
-        </SideNavItems>
-      </SideNav>
+      <div className="difp-body">
+        {/* Side nav */}
+        <nav className="difp-sidenav" aria-label="Course navigation">
+          <NavLink label="Home" onClick={() => navigate('/')} active={pathname === '/'} />
+          <NavLink
+            label={OVERVIEW.navLabel}
+            onClick={() => navigate(`/${OVERVIEW.slug}`)}
+            active={active(OVERVIEW.slug)}
+          />
 
-      <Content style={{ marginInlineStart: '16rem', minHeight: '100vh' }}>
-        {children}
-      </Content>
-    </>
+          <p className="difp-sidenav__group">Modules</p>
+          {CORE_MODULES.map((m) => (
+            <NavLink
+              key={m.slug}
+              num={m.number}
+              label={m.navLabel}
+              onClick={() => navigate(`/${m.slug}`)}
+              active={active(m.slug)}
+            />
+          ))}
+
+          <p className="difp-sidenav__group">Resources</p>
+          {RESOURCE_DOCS.map((m) => (
+            <NavLink key={m.slug} label={m.navLabel} onClick={() => navigate(`/${m.slug}`)} active={active(m.slug)} />
+          ))}
+        </nav>
+
+        {/* Scrollable content */}
+        <main className="difp-scroll">{children}</main>
+      </div>
+    </div>
+  );
+}
+
+function NavLink({
+  label, num, onClick, active,
+}: { label: string; num?: string; onClick: () => void; active: boolean }) {
+  return (
+    <button className={`difp-navlink${active ? ' is-active' : ''}`} onClick={onClick}>
+      {num && <span className="difp-navlink__num">{num}</span>}
+      <span className="difp-navlink__label">{label}</span>
+      {active && <Continue size={14} className="difp-navlink__caret" />}
+    </button>
   );
 }

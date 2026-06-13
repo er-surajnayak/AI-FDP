@@ -1,13 +1,12 @@
 // Shared content contract (see content/design-system.md).
 
-export interface QuizQuestion {
-  id: string;
-  kind: 'mcq' | 'conceptual' | 'scenario';
-  prompt: string;
-  options?: { id: string; label: string }[];
-  answerId?: string;
-  explanation: string;
-}
+export type PlaygroundKey =
+  | 'self-attention'
+  | 'tokenizer'
+  | 'temperature'
+  | 'embedding';
+
+export type ModuleKind = 'overview' | 'module' | 'doc';
 
 export interface ModuleMeta {
   /** route slug, e.g. "module-1-evolution" */
@@ -16,15 +15,16 @@ export interface ModuleMeta {
   navLabel: string;
   /** full title shown in the header */
   title: string;
+  /** display number for module cards (e.g. "01"); undefined for docs */
+  number?: string;
+  /** one-line description for the card grid */
+  blurb: string;
+  /** key topic chips for the card grid */
+  topics: string[];
   durationMin: number;
+  kind: ModuleKind;
   /** raw markdown body, imported via the content loader */
   markdown: string;
-  /** optional interactive playground key rendered alongside the notes */
+  /** optional interactive playground key */
   playground?: PlaygroundKey;
 }
-
-export type PlaygroundKey =
-  | 'self-attention'
-  | 'tokenizer'
-  | 'temperature'
-  | 'embedding';

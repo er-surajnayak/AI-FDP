@@ -1,11 +1,24 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-/** Renders a module's markdown body with GFM tables/strikethrough. */
-export default function MarkdownView({ markdown }: { markdown: string }) {
+/**
+ * Renders markdown with GFM tables/strikethrough.
+ * Callers provide the `.difp-md` wrapper. In `inline` mode paragraphs render
+ * as <span> so the output is valid inside <p>/<span>/<li>.
+ */
+export default function MarkdownView({
+  markdown,
+  inline = false,
+}: {
+  markdown: string;
+  inline?: boolean;
+}) {
   return (
-    <div className="difp-md">
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
-    </div>
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={inline ? { p: ({ children }) => <>{children}</> } : undefined}
+    >
+      {markdown}
+    </ReactMarkdown>
   );
 }

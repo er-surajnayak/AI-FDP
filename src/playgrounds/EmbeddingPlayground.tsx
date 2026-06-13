@@ -85,8 +85,8 @@ export default function EmbeddingPlayground() {
               style={{ cursor: 'pointer' }}
               onClick={() => setAnchor(w.word)}
             >
-              <circle r={isAnchor ? 8 : 5} fill={COLORS[w.group]} stroke={isAnchor ? '#fff' : 'none'} strokeWidth={2} />
-              <text x={10} y={4} fontSize={12} fill="#f4f4f4">{w.word}</text>
+              <circle r={isAnchor ? 8 : 5} fill={COLORS[w.group]} style={{ stroke: isAnchor ? 'var(--cds-text-primary)' : 'none' }} strokeWidth={2} />
+              <text x={10} y={4} fontSize={12} style={{ fill: 'var(--cds-text-primary, #161616)' }}>{w.word}</text>
             </motion.g>
           );
         })}

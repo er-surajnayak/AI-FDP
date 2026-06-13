@@ -106,14 +106,19 @@ export default function SelfAttentionPlayground() {
                 width={44}
                 height={22}
                 rx={4}
-                fill={isFocus ? '#4589ff' : focus != null ? `rgba(69,137,255,${0.12 + w * 0.8})` : '#393939'}
+                style={{
+                  fill: isFocus
+                    ? 'var(--accent)'
+                    : focus != null
+                      ? `rgba(69,137,255,${0.12 + w * 0.85})`
+                      : 'var(--cds-layer-02, #e8e8e8)',
+                }}
               />
               <text
                 textAnchor="middle"
                 y={13}
                 fontSize={11}
-                fill="#f4f4f4"
-                style={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none', fill: isFocus ? '#fff' : 'var(--cds-text-primary, #161616)' }}
               >
                 {tok.length > 9 ? tok.slice(0, 8) + '…' : tok}
               </text>
