@@ -1,0 +1,119 @@
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Lens accent tokens (Faculty / Research / Industry) */
+:root {
+  --lens-faculty: #4589ff;
+  --lens-research: #a56eff;
+  --lens-industry: #08bdba;
+  --misconception: #ff832b;
+}
+
+.difp-content {
+  max-width: 56rem;
+  padding: 2rem 1.5rem 6rem;
+  margin: 0 auto;
+  color: var(--cds-text-primary, #f4f4f4);
+}
+
+/* Markdown rendering inside Carbon dark theme */
+.difp-md {
+  line-height: 1.6;
+  color: var(--cds-text-primary, #f4f4f4);
+}
+.difp-md h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+.difp-md h2 {
+  font-size: 1.4rem;
+  margin: 2rem 0 0.75rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--cds-border-subtle, #393939);
+  padding-bottom: 0.35rem;
+}
+.difp-md h3 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 600;
+}
+.difp-md p,
+.difp-md li {
+  font-size: 0.95rem;
+}
+.difp-md blockquote {
+  border-left: 3px solid var(--lens-faculty);
+  margin: 1rem 0;
+  padding: 0.25rem 1rem;
+  background: var(--cds-layer-01, #262626);
+  font-style: italic;
+}
+.difp-md table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+.difp-md th,
+.difp-md td {
+  border: 1px solid var(--cds-border-subtle, #393939);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.difp-md th {
+  background: var(--cds-layer-01, #262626);
+}
+.difp-md code {
+  background: var(--cds-layer-02, #393939);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+.difp-md pre {
+  background: var(--cds-layer-01, #262626);
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 4px;
+}
+.difp-md pre code {
+  background: none;
+  padding: 0;
+}
+.difp-md hr {
+  border: none;
+  border-top: 1px solid var(--cds-border-subtle, #393939);
+  margin: 2rem 0;
+}
+.difp-md a {
+  color: var(--lens-faculty);
+}
+
+.difp-playground {
+  border: 1px solid var(--cds-border-subtle, #393939);
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--cds-layer-01, #262626);
+}
+.difp-playground__title {
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.difp-playground__hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 0 0 1rem;
+}
