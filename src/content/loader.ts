@@ -59,7 +59,7 @@ const DEFS: ModuleDef[] = [
   },
   {
     slug: 'module-6-how-llms-work', day: 1, navLabel: 'How LLMs Work', title: 'How Large Language Models Work',
-    number: '06', durationMin: 55, kind: 'module', file: 'module-6-how-llms-work.md', playground: 'temperature',
+    number: '06', durationMin: 55, kind: 'module', file: 'module-6-how-llms-work.md', playground: 'llm-pipeline',
     blurb: 'The full pipeline, prompt to response — autoregression, probabilities, temperature.',
     topics: ['Next-token prediction', 'Temperature', 'Hallucination'],
   },

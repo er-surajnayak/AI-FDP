@@ -6,6 +6,7 @@ export type PlaygroundKey =
   | 'self-attention'
   | 'tokenizer'
   | 'temperature'
+  | 'llm-pipeline'
   | 'embedding';
 
 export type ModuleKind = 'overview' | 'module' | 'doc';
