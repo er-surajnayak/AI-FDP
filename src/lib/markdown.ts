@@ -165,7 +165,18 @@ export function parseQuiz(body: string): ParsedQuizQ[] {
     const numM = head.match(/\*\*(Q\d+)\s*\(([^)]*)\)\.?\*\*/);
     const number = numM ? numM[1] : 'Q';
     const label = numM ? numM[2] : 'Question';
-    const question = head.replace(/^\*\*Q\d+\s*\([^)]*\)\.?\*\*\s*/, '').replace(/\*\*/g, '').trim();
+    const rawQuestion = head.replace(/^\*\*Q\d+\s*\([^)]*\)\.?\*\*\s*/, '').replace(/\*\*/g, '').trim();
+
+    // Open-ended questions put the answer inline on the same line
+    // ("…? *Answer:* manual feature engineering"). Split it off so the
+    // question doesn't leak the answer and the reveal has content.
+    let question = rawQuestion;
+    let inlineAnswer = '';
+    const split = rawQuestion.split(/\s*\*?(?:Answer|Explanation):\*?\s*/i);
+    if (split.length > 1) {
+      question = split[0].trim();
+      inlineAnswer = split.slice(1).join(' ').replace(/\*+/g, '').trim();
+    }
 
     const options: QuizOption[] = [];
     let explanation = '';
@@ -185,7 +196,7 @@ export function parseQuiz(body: string): ParsedQuizQ[] {
     return {
       kind: options.length >= 2 ? 'mcq' : 'open',
       number, label: label.trim(), question, options,
-      explanation: explanation.replace(/^\*+|\*+$/g, '').trim(),
+      explanation: (inlineAnswer || explanation).replace(/^\*+|\*+$/g, '').trim(),
     };
   });
 }

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import InteractiveLab from '../components/InteractiveLab';
 
 const DEFAULT = 'Tokenization splits research papers into sub-word tokens.';
@@ -47,11 +46,11 @@ export default function TokenizerPlayground() {
       <div className="difp-stage" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: '0.9rem', marginBottom: '1rem' }}>
         {tokens.map((t, i) =>
           t.trim().length === 0 ? <span key={i} style={{ width: 6 }} /> : (
-            <motion.span key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i * 0.02, 0.4) }}
+            <span key={i}
               style={{ background: 'var(--panel-bg-2)', border: `1px solid ${colors[i % colors.length]}`, borderRadius: 5, padding: '3px 7px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25 }}>
               <span style={{ fontFamily: 'var(--mono)', fontSize: 13, color: 'var(--text)' }}>{t.replace(/ /g, '␣')}</span>
               <span style={{ fontFamily: 'var(--mono)', fontSize: 9, color: colors[i % colors.length] }}>{tokenId(t)}</span>
-            </motion.span>
+            </span>
           ),
         )}
       </div>
