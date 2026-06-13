@@ -19,80 +19,37 @@
 2. **Verify every fact, citation, and number** — plausibility ≠ truth (Module 6).
 3. **Disclose AI use** per your institution's/publisher's policy; preserve academic integrity.
 
-**The C.R.A.F.T. prompt pattern (teach once, reuse everywhere):**
+### A reusable prompt pattern — C.R.A.F.T.
+
 - **C**ontext — who you are, the situation, the audience.
 - **R**ole — "Act as a peer reviewer in computational biology…"
-- **A**ction — the precise task and output format.
+- **A**ction — the precise task and the output format.
 - **F**ew-shot — an example of a good output, if you have one.
-- **T**est/verify — ask it to flag uncertainty, cite assumptions, or self-check.
-
-The four domains below each get: **use cases · demonstration · activity · discussion questions.**
+- **T**est — ask it to flag uncertainty or check its own work.
 
 ---
 
 ### 🏫 Teaching
 
-**Use cases.**
-- **Lesson & session planning** — outlines, learning objectives aligned to Bloom's taxonomy, timing.
-- **Question-bank generation** — MCQs/short-answer at specified difficulty + distractor rationales.
-- **Rubric creation** — criteria, level descriptors, point allocations from a task description.
-- **Personalized learning** — differentiated explanations (novice→advanced), worked examples, analogies tailored to a major.
-- **Feedback drafting** — first-pass feedback on submissions (faculty edits and owns it).
-
-**Demonstration.** Prompt: *"Act as an instructional designer. Create a 50-minute session plan on [topic] for first-year engineering students: objectives (Bloom-aligned), a timed agenda, one active-learning activity, and 3 formative-assessment questions with answers."* Expected: a structured, editable plan.
-
-**Activity (10 min).** Each participant generates a **5-question MCQ quiz** on a topic they teach, then critiques: Are distractors plausible? Any factual errors? Bias? Difficulty right? Edit one question to fix a flaw.
-
-**Discussion questions.** Where does AI-assisted question generation threaten or strengthen assessment validity? How should students be allowed to use these tools — and how do we redesign assessments accordingly?
+Generative AI can assist with **lesson planning, question-paper generation, outcome mapping, rubric creation, and personalised learning materials**. The goal is **not to replace educators** — it is to reduce repetitive work so educators can focus on higher-value activities.
 
 ---
 
 ### 🔬 Research
 
-**Use cases.**
-- **Literature review support** — summarize papers, extract methods/findings, build comparison tables (ground with the actual PDFs; verify).
-- **Gap analysis** — "given these abstracts, what's understudied?" (as a *hypothesis generator*, not an oracle).
-- **Proposal writing** — structure, clarity, lay summaries, reviewer-anticipation; never fabricate preliminary data.
-- **Research summarization** — plain-language abstracts, conference-talk outlines, graphical-abstract text.
-- **Coding/data analysis** — write/debug analysis scripts, explain statistical methods.
-
-**Demonstration.** Prompt: *"Summarize this paper [pasted/grounded] in 150 words for a non-specialist, then list its main contribution, method, key limitation, and 3 questions a reviewer would ask. Mark anything you're unsure about."* Expected: concise summary + a verification-friendly uncertainty list.
-
-**Activity (10 min).** Take one abstract from your field; have the model summarize and propose 2 research gaps. **Fact-check** every claim against the abstract; flag any hallucination. (This previews the end-of-day assignment.)
-
-**Discussion questions.** What are the authorship/disclosure norms for AI-assisted writing in your discipline/journals? How do we use gap-analysis output without outsourcing scholarly judgment?
+Researchers can use AI for **literature review, paper summarisation, gap identification, proposal drafting, and brainstorming**. AI should be treated as a **research assistant, not a research replacement** — human expertise remains essential.
 
 ---
 
 ### 💼 Consultancy
 
-**Use cases.**
-- **Proposal generation** — tailor scope, deliverables, timelines from a brief.
-- **Client requirement analysis** — turn messy notes/transcripts into structured requirements, stakeholder maps, risk lists.
-- **Market research synthesis** — summarize reports, draft competitor matrices, SWOT (verify sources).
-- **Deliverable drafting** — executive summaries, slide outlines, FAQs.
-
-**Demonstration.** Prompt: *"Act as a management consultant. From these client meeting notes [paste non-confidential], produce: a requirements list, assumptions, open questions for the client, and a 1-page proposal outline."* Expected: structured artifacts that cut first-draft time dramatically.
-
-**Activity (10 min).** From a short fictional client brief, generate a proposal outline + risk register; critique completeness and whether any "facts" need verification before sending.
-
-**Discussion questions.** What client-confidentiality and disclosure obligations apply before using these tools? Where does AI add genuine value vs. create a liability if unverified?
+AI can accelerate **proposal generation, market analysis, requirement gathering, and report creation** — freeing consultants to spend more time on **strategic decision-making**.
 
 ---
 
 ### 🏭 Industry
 
-**Use cases.**
-- **Documentation** — API docs, runbooks, onboarding guides from code/specs.
-- **Customer support** — RAG-grounded answer drafting, ticket summarization, tone normalization.
-- **Knowledge management** — summarize/organize internal wikis; semantic search over policies (embeddings, Mod 5).
-- **Automation** — draft emails/reports, classify/route tickets, extract structured data from documents.
-
-**Demonstration.** Prompt: *"Turn this function/spec into clear API documentation with parameters, return values, errors, and a usage example,"* or *"Summarize this 12-message support thread into a 3-line resolution note + tags."* Expected: production-style docs / crisp summaries.
-
-**Activity (10 min).** Take a paragraph of dense internal text and generate (a) a one-line TL;DR, (b) a structured FAQ, (c) a tagged summary — then judge which is deployment-ready and what guardrails it needs.
-
-**Discussion questions.** Where must a human stay in the loop (compliance, safety, customer-facing accuracy)? How do you measure quality/ROI of an AI workflow?
+Organisations use AI for **customer support, knowledge management, process automation, software development, and decision-support systems**. Generative AI is rapidly becoming a **foundational technology** across industries.
 
 ---
 

@@ -14,20 +14,31 @@
 
 ## 4. Teaching Content
 
-**From IDs to meaning.** A token ID (say 4823 for "professor") is arbitrary — 4823 isn't "more than" 4822 in any meaningful way. An **embedding** replaces each token with a **dense vector** of numbers (e.g., hundreds of dimensions) *learned* so that words used in similar contexts land near each other. Meaning becomes **position in a high-dimensional space**.
+Suppose we ask a computer: *what is a professor?* The computer doesn't understand meaning — it understands **numbers**. So words are converted into numerical vectors called **embeddings**.
 
-**Why this is powerful:**
-- **Similarity = distance/angle.** "professor" and "faculty" sit close; "professor" and "banana" sit far. The model can now *measure* relatedness with arithmetic (cosine similarity).
-- **Clusters emerge.** Academic terms (research, publication, citation, peer-review) form a neighborhood; everyday words form others — *no one labeled these*; they emerge from usage.
-- **Composability.** Because directions in the space can encode relationships, vector arithmetic captures analogies.
+Think of embeddings as **coordinates on a map**. Words with similar meanings sit close together. *Professor*, *faculty*, and *lecturer* would occupy nearby locations, while *football*, *cricket*, and *stadium* form a different cluster. This is how machines capture **semantic meaning**.
 
-**The famous analogy.** `vec("King") − vec("Man") + vec("Woman") ≈ vec("Queen")`. Read it as: "the *direction* from Man to King (roughly, 'add royalty') applied to Woman lands near Queen." It's a striking demonstration that **relationships are encoded as consistent directions** (gender, tense, capital-of-country).
+### Why embeddings are revolutionary
 
-**The caveats.** The result is *approximate* (nearest neighbor, not exact), depends on the embedding model, and famous examples are partly curated — many analogies don't work cleanly. Embeddings also encode **social biases** present in their training data — an important research and ethics consideration.
+Imagine organising books in a library. Instead of arranging them alphabetically, you arrange them by **similarity** — Machine Learning books together, Healthcare books together, Finance books together. Embeddings create the same kind of organisation for language: they transform words into a mathematical space, and that space becomes the foundation of modern AI systems.
 
-**Contextual vs. static embeddings.** Classic embeddings (Word2Vec, GloVe) give each word *one* fixed vector — so "bank" has a single, blended meaning. Modern Transformer embeddings are **contextual**: "bank" near "river" and "bank" near "loan" get *different* vectors. This is the payoff of attention (Module 3) feeding representation.
+### Similarity is distance
 
-**Similarity search (the practical engine of modern AI).** Embed a query and a corpus of documents; find the documents whose vectors are *nearest* the query's. This powers semantic search, recommendation, deduplication, clustering, and **Retrieval-Augmented Generation (RAG)** — giving an LLM relevant documents to ground its answer. Vector databases (FAISS, Pinecone, pgvector) make nearest-neighbor search fast at scale.
+Because words become positions, the model can **measure** relatedness with arithmetic (cosine similarity). "Professor" and "faculty" sit close; "professor" and "banana" sit far. And the clusters **emerge from usage** — no one labels them.
+
+### The famous analogy
+
+`vec("King") − vec("Man") + vec("Woman") ≈ vec("Queen")`. Read it as: "the *direction* from Man to King (roughly, 'add royalty') applied to Woman lands near Queen." Relationships are encoded as **consistent directions** (gender, tense, capital-of-country).
+
+**The caveats.** The result is *approximate*, depends on the embedding model, and famous examples are partly curated — many analogies don't work cleanly. Embeddings also encode **social biases** present in their training data — an important research and ethics consideration.
+
+### Contextual vs. static embeddings
+
+Classic embeddings (Word2Vec, GloVe) give each word *one* fixed vector — so "bank" has a single, blended meaning. Modern Transformer embeddings are **contextual**: "bank" near "river" and "bank" near "loan" get *different* vectors. This is the payoff of attention (Module 3) feeding representation.
+
+### Similarity search — the practical engine of modern AI
+
+Embed a query and a corpus of documents, then find the documents whose vectors are *nearest* the query's. This powers semantic search, recommendation, deduplication, clustering, and **Retrieval-Augmented Generation (RAG)** — giving an LLM relevant documents to ground its answer. Vector databases (FAISS, Pinecone, pgvector) make this fast at scale.
 
 > **The math, for reference.** cosine similarity = (A·B)/(‖A‖‖B‖) ∈ [−1, 1]; a value of 1 means the same direction (most similar).
 

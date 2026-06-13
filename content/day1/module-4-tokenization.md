@@ -14,25 +14,32 @@
 
 ## 4. Teaching Content
 
-**What is a token?** A token is a chunk of text the model treats as one unit — often a whole common word, sometimes a sub-word piece, sometimes punctuation or whitespace. Tokenizers (e.g., Byte-Pair Encoding) learn a fixed vocabulary of frequent chunks from data.
+A common misconception is that LLMs understand **words**. They don't — they understand **tokens**.
+
+Think of tokens as pieces of language. Take the sentence *"Generative AI is transforming education."* A model may break this into smaller units. Why? Because computers cannot process language directly — they need **numerical representations**. Tokens are the bridge between human language and machine computation.
 
 - Common words → one token: `"the"`, `"research"`.
-- Rare/long words → split: `"tokenization"` → `token` + `ization`; `"antidisestablishmentarianism"` → many pieces.
+- Rare or long words → split: `"tokenization"` → `token` + `ization`.
 - Numbers, code, emojis, and other languages tokenize differently (often less efficiently).
-- Rule of thumb (English): **~4 characters ≈ 1 token**, **~100 tokens ≈ 75 words**. Always approximate — verify with a tokenizer.
+- Rule of thumb (English): **~4 characters ≈ 1 token**, **~100 tokens ≈ 75 words** — always approximate, and verify with a tokenizer.
 
-**Why tokens, not words or characters?**
-- **Characters** would make sequences extremely long and force the model to relearn spelling from scratch → wasteful.
-- **Whole words** would need a gigantic vocabulary and still fail on unseen/rare words and typos.
-- **Sub-word tokens** are the sweet spot: a manageable vocabulary that can compose *any* word (even new ones) from known pieces, and handles morphology gracefully.
+### Why tokens, not words or characters?
 
-**Token limits & the context window.** A model can only "see" a fixed number of tokens at once — its **context window** (e.g., a few thousand to hundreds of thousands of tokens depending on the model). This window holds **everything**: the system prompt, your prompt, any documents you paste, the conversation history, *and* the response being generated.
+- **Characters** would make sequences extremely long and force the model to relearn spelling from scratch.
+- **Whole words** would need a gigantic vocabulary and still fail on unseen words and typos.
+- **Sub-word tokens** are the sweet spot: a manageable vocabulary that can compose *any* word from known pieces.
+
+### Token limits and the context window
+
+A model can only "see" a fixed number of tokens at once — its **context window**. This window holds **everything**: the system prompt, your prompt, any documents you paste, the conversation history, *and* the response being generated.
+
 - Exceed it and content gets **truncated** — usually the oldest turns drop out. This is why a long chat "forgets" what you said at the start.
-- Longer windows enable whole-document reasoning but cost more and can dilute attention ("lost in the middle" — models sometimes attend less to mid-context material).
+- Longer windows allow whole-document reasoning but cost more and can dilute attention.
 
-**Why faculty should care:**
+### Why this matters for faculty
+
 - **Cost** is billed per token (input + output). Length is money.
-- **Length limits** decide whether your 40-page paper fits, or must be chunked.
+- **Length limits** decide whether your 40-page paper fits or must be chunked.
 - **"It forgot my instructions"** is often a context-window eviction, not a reasoning failure.
 
 ## 5. Storytelling Flow

@@ -14,31 +14,33 @@
 
 ## 4. Teaching Content
 
-**What "foundation model" means.** A single large model is **pre-trained** on broad data, then **adapted** (prompting, fine-tuning, tools/RAG) to countless tasks — summarizing, coding, tutoring, extraction. "Foundation" = a shared base others build on, rather than one bespoke model per task. They're **general-purpose, adaptable, and emergent** (new capabilities appear with scale).
+Modern Generative AI is powered by **foundation models** — models trained on massive amounts of data and then **adapted** for many different tasks (summarising, coding, tutoring, extraction). "Foundation" means a shared base others build on, rather than one bespoke model per task. They are general-purpose, adaptable, and *emergent* — new capabilities appear with scale.
 
-**The selection axes that actually matter for faculty/institutions:**
-- **Capability/quality** — reasoning depth, coding, math, multilingual, multimodal (text+image+audio).
+### The major families
+
+- **GPT (OpenAI)** — strong general-purpose reasoning and coding.
+- **Claude (Anthropic)** — excellent for long-form analysis, research, and document understanding.
+- **Gemini (Google)** — strong integration with Google's ecosystem and multimodal capabilities.
+- **Llama (Meta)** — open-weight and customisable.
+- **DeepSeek** — efficient and cost-effective for many tasks.
+
+Each model has strengths and limitations. Selecting the right one depends on the **use case**.
+
+### How to choose — the axes that matter
+
+- **Capability** — reasoning depth, coding, math, multilingual, multimodal.
 - **Context window** — how much you can feed at once (whole papers? whole codebases?).
-- **Cost** — per-token price; matters at scale.
-- **Openness** — *closed/API* (GPT, Claude, Gemini) vs. *open-weight* (Llama, DeepSeek) you can self-host.
-- **Privacy & data governance** — can data leave your institution? Is it used for training? Critical for student data (FERPA/GDPR-type concerns) and unpublished research.
-- **Ecosystem & integration** — SDKs, tool use, availability in your existing tools.
-
-**The families (high-level, current-as-of-program — verify live, this field moves fast):**
-
-| Family | Maker | Access | Reputation / sweet spot | Watch-outs |
-|---|---|---|---|---|
-| **GPT** | OpenAI | Closed API + ChatGPT | Strong all-rounder; huge ecosystem, tools, plugins; broad adoption | Closed; cost at scale; data-governance review needed |
-| **Claude** | Anthropic | Closed API + claude.ai | Long-context, careful reasoning, writing/analysis, safety focus; large context windows | Closed; availability/region limits |
-| **Gemini** | Google | Closed API + app | Strong multimodal, very long context, tight Google-workspace/search integration | Closed; ecosystem lock-in |
-| **Llama** | Meta | **Open-weight** | Self-hostable → data stays in-house; customizable/fine-tunable; no per-token API cost | You run the infra; top-end quality may trail frontier closed models |
-| **DeepSeek** | DeepSeek | **Open-weight** | Strong reasoning/coding at low cost; open weights | Newer ecosystem; governance/diligence on hosting & origin |
+- **Cost** — per-token price, which matters at scale.
+- **Openness** — closed/API (GPT, Claude, Gemini) vs. open-weight (Llama, DeepSeek) you can self-host.
+- **Privacy & governance** — can data leave your institution? Critical for student data and unpublished research.
+- **Ecosystem** — SDKs, tool use, and availability in your existing tools.
 
 > **A note on a fast-moving field:** rankings shift monthly. Treat the *axes* as durable and the *specific standings* as perishable — always check current benchmarks and your institution's approved-tools list.
 
-**Open vs. closed — the decision that matters most for academia:**
-- **Closed/API:** easiest, usually highest frontier quality, but data leaves your premises and you accept the vendor's terms.
-- **Open-weight (self-hosted):** data stays in-house (great for sensitive student data and unpublished research), customizable, no per-call fee — but you own the GPUs, ops, and quality gap.
+### Open vs. closed — the decision that matters most for academia
+
+- **Closed / API:** easiest, usually highest frontier quality, but data leaves your premises and you accept the vendor's terms.
+- **Open-weight (self-hosted):** data stays in-house (great for sensitive student data and unpublished research), customisable, no per-call fee — but you own the infrastructure, operations, and any quality gap.
 
 ## 5. Storytelling Flow
 1. **The editorial metaphor:** choosing a journal for a paper = choosing a model for a task. There's no "best journal," only "best fit."

@@ -14,25 +14,62 @@
 
 ## 4. Teaching Content
 
-**CNN — the pattern spotter.** Convolutional Neural Networks slide small filters across a grid (an image) to detect local patterns — edges, textures, then shapes, then objects. They excel at *spatial* data. But text isn't a fixed grid; meaning depends on order and distance, not pixel neighborhoods.
+### Convolutional Neural Networks (CNNs)
 
-**RNN — the reader with a notebook.** Recurrent Neural Networks process a sequence **one token at a time**, carrying a "hidden state" — a running summary — forward. Conceptually: read a word, update your notes, read the next word, update again.
-- *Strength:* naturally handles sequences of any length.
-- *Weakness 1 — sequential:* word N can't be processed until word N-1 is done. **No parallelism** → slow training, can't exploit GPUs fully.
-- *Weakness 2 — fading memory:* the running summary gets overwritten. By the end of a long sentence, early words are a faint smudge. Gradients vanish during training (the "vanishing gradient problem").
+CNNs became famous through computer vision. Imagine walking into a classroom — within seconds you recognise the students, the whiteboard, the projector, the chairs. Your brain identifies visual patterns automatically. CNNs do something similar, and they excel at understanding images: face recognition, medical imaging, autonomous vehicles, quality inspection.
 
-**LSTM — the reader with a better notebook (and a highlighter).** Long Short-Term Memory networks add **gates** (input, forget, output) and a separate "cell state" — a controlled memory lane that decides what to keep, update, or discard. This dramatically *extends* memory and was state-of-the-art for years.
-- *But:* it's still **sequential** (no parallelism), and memory over *very* long ranges still degrades. It mitigates the problem; it doesn't remove it.
+But CNNs are not ideal for language. Language has a **sequence** — the order of words matters. That led to a different architecture.
 
-**The wall.** Two stubborn limits remained:
-1. **Sequential bottleneck** — you can't parallelize a fundamentally step-by-step process. Training on huge corpora is painfully slow.
-2. **Long-range dependencies** — "The keys, which I left on the table by the door after the long meeting that ran late, are *missing*." Linking "keys" to "are missing" across all that text is hard when memory is a single fading vector.
+### Recurrent Neural Networks (RNNs)
 
-**2017 — "Attention Is All You Need."** Vaswani et al. proposed the **Transformer**, which throws out recurrence entirely. Instead of passing a summary step by step, **every word looks directly at every other word, all at once**, and decides how much to "attend" to each. Two consequences, both revolutionary:
-- **Parallelism:** all positions are processed simultaneously → train on enormous data with GPUs/TPUs → scale.
-- **Direct long-range links:** "keys" connects to "missing" in *one hop*, regardless of distance — no fading.
+RNNs were designed for sequential data. Consider *"The professor submitted the research paper."* Remove the word order — *"Research submitted professor paper the"* — and the meaning disappears. Language depends on sequence.
 
-This is why Transformers "changed AI forever": they made **scaling** practical, and scaling — bigger models on more data — is what produced GPT, Claude, Gemini, and the generative wave. (The *how* of attention is Module 3.)
+RNNs process information **one word at a time**, remembering previous words while reading new ones. At first this seemed promising. But a major problem emerged.
+
+### The memory problem
+
+Imagine a professor trying to recall the name of a student introduced at the start of the semester. Weeks later, the memory has faded. RNNs suffer from the same issue. Consider:
+
+> "The research article that was submitted after several revisions and extensive peer reviews was finally accepted."
+
+The word *"accepted"* depends on information that appeared much earlier. As sentences grow longer, RNNs begin forgetting important information. This is the **long-term dependency problem**.
+
+### LSTMs: a better memory system
+
+Long Short-Term Memory networks (LSTMs) tried to solve this. Think of an LSTM as a professor carrying a notebook, sticky notes, and reminders — instead of forgetting everything, important information is stored. LSTMs performed far better than RNNs.
+
+Yet they still processed words **sequentially**, which made training slow, and very long-range memory still degraded. A bigger breakthrough was about to arrive.
+
+### The breakthrough that changed AI forever
+
+In 2017, researchers published a paper titled **"Attention Is All You Need."** It introduced the **Transformer** architecture — considered by many the most influential AI paper of the last decade. Why? Because it solved a fundamental problem.
+
+### Human attention vs machine attention
+
+Imagine reading a research paper. On page 12 you see *"this method"* — and your brain instantly remembers the method introduced on page 3. You don't reread every page in order; you connect the relevant information directly. Humans use **attention**.
+
+Transformers introduced a similar capability: instead of processing words one by one, **every word can directly look at every other word**.
+
+### A simple example
+
+> "The animal didn't cross the street because it was too tired."
+
+What does *"it"* refer to? Most people answer immediately: the animal. Now change one word:
+
+> "The animal didn't cross the street because it was too narrow."
+
+Now *"it"* refers to the street. The word *"it"* never changed — the surrounding context did. Humans understand this naturally, and attention lets AI models learn these relationships too.
+
+### Why Transformers won
+
+Transformers can:
+
+- Process information in parallel
+- Understand long-range relationships
+- Scale to enormous datasets
+- Learn richer contextual information
+
+This architecture became the foundation for **GPT, Claude, Gemini, Llama, and DeepSeek** — essentially every modern LLM. The *how* of attention is the next module.
 
 ## 5. Storytelling Flow
 1. **Recap & pivot:** "Last module, vision was solved. Now hand the network a *sentence*."

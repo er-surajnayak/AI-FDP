@@ -14,25 +14,41 @@
 
 ## 4. Teaching Content
 
-**The pipeline, stage by stage:**
-1. **Prompt** — your text (plus any system instructions and history) enters.
-2. **Tokenization** — text → token IDs (Module 4).
-3. **Embedding (+ positional info)** — each token ID → a vector; position information is added so order matters (Transformers have no built-in sense of order).
-4. **Transformer layers** — a stack of self-attention + feed-forward blocks (Modules 2–3). Each layer lets every token refine its representation by attending to all others. Dozens of layers build up increasingly abstract "understanding."
-5. **Probability distribution** — the final layer produces, over the *entire vocabulary*, a probability for **the next token**. ("After 'The capital of France is', the token 'Paris' gets high probability.")
-6. **Token selection** — pick a next token from that distribution (greedy, or sampled — see temperature).
-7. **Append & repeat (autoregression)** — add the chosen token to the input and run the whole thing again for the *next* token. Repeat until a stop token or length limit.
+### Learning by predicting the next token
 
-**The key mental shift:** an LLM is fundamentally a **next-token predictor**. It does not "plan a sentence" then write it; it repeatedly answers "what's the most plausible next token given everything so far?" Coherence emerges from doing this extremely well, billions of parameters deep, over the whole context.
+A surprising fact about LLMs is that they are trained on a deceptively simple objective: **predict the next token**.
 
-**Temperature — the creativity dial.** Before selection, a *temperature* reshapes the probability distribution:
-- **Low (→0):** distribution sharpens; the top token dominates → **deterministic, focused, repetitive.** Good for facts, code, extraction.
-- **High (→1+):** distribution flattens; lower-probability tokens get a real chance → **diverse, creative, riskier** (more errors/hallucination). Good for brainstorming.
-- **top-k / top-p (nucleus):** additionally restrict sampling to the k most likely tokens, or the smallest set whose probability sums to p — pruning the long tail of nonsense.
+For example, given *"Artificial Intelligence is transforming"*, the possible next words include *education*, *healthcare*, *industry*, *research*. The model learns the **probabilities**. After seeing billions of examples, it becomes remarkably good at predicting what comes next — and that process eventually creates capabilities that appear intelligent.
 
-**Why outputs vary run-to-run:** with temperature > 0, selection is *stochastic*, so the same prompt can yield different responses. At temperature 0 it's (near-)deterministic.
+### Why LLMs feel intelligent
 
-**Where hallucination comes from (set up Module 8's responsibility theme):** the model optimizes *plausibility*, not *truth*. A confidently-worded but fabricated citation is a high-probability *sounding* sequence — fluent and wrong. This is structural, not a bug to be fully patched — hence verification and grounding (RAG) matter.
+When people first meet ChatGPT, they often assume *"it understands everything."* In reality, the model predicts likely continuations based on patterns learned during training. Yet because language itself contains reasoning, knowledge, and structure, the resulting behaviour often appears intelligent. This is one of the most fascinating aspects of modern AI.
+
+### From prompt to response
+
+When you enter a prompt, several things happen:
+
+1. The prompt is converted into **tokens**.
+2. Tokens are transformed into **embeddings**.
+3. The embeddings pass through multiple **transformer layers**.
+4. **Attention** identifies the relevant relationships.
+5. The model predicts the **most likely next token**.
+6. The process repeats until a complete response is generated.
+
+What looks like a conversation is actually a highly sophisticated sequence of **next-token predictions**. The model never "plans" a whole sentence — coherence emerges from doing this one step extremely well, over and over.
+
+### Temperature — the creativity dial
+
+Before each token is chosen, a **temperature** reshapes the probability distribution:
+
+- **Low (→ 0):** the distribution sharpens and the top token dominates → focused, deterministic, repetitive. Good for facts, code, and extraction.
+- **High (→ 1+):** the distribution flattens and lower-probability tokens get a real chance → diverse, creative, riskier. Good for brainstorming.
+
+With temperature above 0, selection is **random**, so the same prompt can give different answers. At temperature 0 it is (near-)deterministic.
+
+### Where hallucination comes from
+
+The model optimises for **plausibility**, not **truth**. A confidently-worded but fabricated citation is simply a high-probability-*sounding* sequence — fluent and wrong. This is structural, not a bug to be fully patched, which is why **verification and grounding (RAG)** matter.
 
 ## 5. Storytelling Flow
 1. **Assemble the team:** "Token (Mod 4), Embedding (Mod 5), Attention (Mod 3) — line them up." Show the pipeline diagram lighting stage by stage.
