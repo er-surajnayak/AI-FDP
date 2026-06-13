@@ -391,6 +391,11 @@ body {
 .difp-md hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
 .difp-md a { color: var(--accent); }
 
+/* ---------- Lab legend ---------- */
+.difp-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.difp-legend-item { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); }
+.difp-legend-item i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: 0 0 auto; }
+
 /* ---------- LLM pipeline lab ---------- */
 .difp-pipe { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: stretch; }
 .difp-pipe__cell { display: flex; align-items: stretch; gap: 0.4rem; }
