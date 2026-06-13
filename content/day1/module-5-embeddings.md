@@ -21,13 +21,15 @@
 - **Clusters emerge.** Academic terms (research, publication, citation, peer-review) form a neighborhood; everyday words form others — *no one labeled these*; they emerge from usage.
 - **Composability.** Because directions in the space can encode relationships, vector arithmetic captures analogies.
 
-**The famous analogy — handled honestly.** `vec("King") − vec("Man") + vec("Woman") ≈ vec("Queen")`. Read it as: "the *direction* from Man to King (roughly, 'add royalty') applied to Woman lands near Queen." It's a striking demonstration that **relationships are encoded as consistent directions** (gender, tense, capital-of-country). **Caveats to state plainly** (your audience will ask): the result is *approximate* (nearest neighbor, not exact), depends on the embedding model, and famous examples are partly curated — many analogies don't work cleanly, and embeddings also encode **social biases** present in training data (an important research/ethics discussion).
+**The famous analogy.** `vec("King") − vec("Man") + vec("Woman") ≈ vec("Queen")`. Read it as: "the *direction* from Man to King (roughly, 'add royalty') applied to Woman lands near Queen." It's a striking demonstration that **relationships are encoded as consistent directions** (gender, tense, capital-of-country).
+
+**The caveats.** The result is *approximate* (nearest neighbor, not exact), depends on the embedding model, and famous examples are partly curated — many analogies don't work cleanly. Embeddings also encode **social biases** present in their training data — an important research and ethics consideration.
 
 **Contextual vs. static embeddings.** Classic embeddings (Word2Vec, GloVe) give each word *one* fixed vector — so "bank" has a single, blended meaning. Modern Transformer embeddings are **contextual**: "bank" near "river" and "bank" near "loan" get *different* vectors. This is the payoff of attention (Module 3) feeding representation.
 
 **Similarity search (the practical engine of modern AI).** Embed a query and a corpus of documents; find the documents whose vectors are *nearest* the query's. This powers semantic search, recommendation, deduplication, clustering, and **Retrieval-Augmented Generation (RAG)** — giving an LLM relevant documents to ground its answer. Vector databases (FAISS, Pinecone, pgvector) make nearest-neighbor search fast at scale.
 
-> **Show the math (optional accordion):** cosine similarity = (A·B)/(‖A‖‖B‖) ∈ [−1, 1]; 1 = same direction (most similar). Present only after the geometry intuition lands.
+> **The math, for reference.** cosine similarity = (A·B)/(‖A‖‖B‖) ∈ [−1, 1]; a value of 1 means the same direction (most similar).
 
 ## 5. Storytelling Flow
 1. **The empty number:** "Token 4823. Quick — is that close in meaning to token 4822? You can't tell. Neither can the model — until we embed."

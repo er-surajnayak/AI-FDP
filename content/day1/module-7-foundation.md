@@ -34,7 +34,7 @@
 | **Llama** | Meta | **Open-weight** | Self-hostable → data stays in-house; customizable/fine-tunable; no per-token API cost | You run the infra; top-end quality may trail frontier closed models |
 | **DeepSeek** | DeepSeek | **Open-weight** | Strong reasoning/coding at low cost; open weights | Newer ecosystem; governance/diligence on hosting & origin |
 
-> Frame openly: "rankings shift monthly; treat the *axes* as durable and the *specific standings* as perishable. Always check current benchmarks and your institution's approved-tools list."
+> **A note on a fast-moving field:** rankings shift monthly. Treat the *axes* as durable and the *specific standings* as perishable — always check current benchmarks and your institution's approved-tools list.
 
 **Open vs. closed — the decision that matters most for academia:**
 - **Closed/API:** easiest, usually highest frontier quality, but data leaves your premises and you accept the vendor's terms.

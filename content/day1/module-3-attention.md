@@ -14,13 +14,13 @@
 
 ## 4. Teaching Content
 
-**Start with the human experience, not the math.** When you read *"The animal didn't cross the street because it was too tired,"* you instantly know **"it" = "the animal,"** not "the street." How? You weighed the words and decided "animal" is the most *relevant* antecedent. **Attention is that weighing, made mechanical and learnable.**
+**The human experience first.** When you read *"The animal didn't cross the street because it was too tired,"* you instantly know **"it" = "the animal,"** not "the street." How? You weighed the words and decided "animal" is the most *relevant* antecedent. **Attention is that weighing, made mechanical and learnable.**
 
 **Attention = for each word, a set of weights over all other words** saying "how much should I pay attention to you when I build my understanding of myself?" High weight = strong relationship; low weight = ignore.
 
 **Self-attention** is attention applied *within a single sequence*: every token computes weights over every other token of the same sentence. The result is a **context-aware representation** of each word — "bank" near "river" leans toward riverbank; "bank" near "loan" leans toward finance. The word's meaning is *refined by its neighbors via attention*.
 
-**Query, Key, Value — the library/search intuition (do this before any formula):**
+**Query, Key, Value — the library/search intuition:**
 - Imagine each word goes to a library to *understand itself in context*.
 - Its **Query** is the question it's asking: *"Who here is relevant to me?"*
 - Every word also advertises a **Key** — a label saying *"here's what I'm about."*
@@ -32,7 +32,7 @@ So for "it": its Query ("what noun am I standing in for?") matches the Key of "a
 
 **Multi-head attention (one sentence, no math):** the model runs several attention computations in parallel ("heads"), each free to focus on a different kind of relationship — one head tracks grammar (subject–verb), another tracks coreference (pronoun→noun), another tracks topic. Their results are combined. This is why a single layer can capture many relationship types at once.
 
-> **Show the math (optional accordion only):** attention weights = softmax(Q·Kᵀ / √dₖ), output = weights · V. Present this *only* after the intuition lands, framed as "the search metaphor, written compactly." Keep it collapsed by default.
+> **The math, for reference.** attention weights = softmax(Q·Kᵀ / √dₖ), and the output = weights · V — the search metaphor written compactly.
 
 ## 5. Storytelling Flow
 1. **The pronoun puzzle:** put the "animal/street/tired" sentence on screen; ask the room "what does *it* refer to?" Everyone knows. "*How* did you know? You just used attention."

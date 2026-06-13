@@ -34,7 +34,6 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
     secs.push({ id: 'objectives', label: 'Orientation', heading: "What you'll be able to do", accent: 'blue',
       body: <div className="difp-objectives"><ul>{objList.map((o, i) => <li key={i}><span className="difp-md difp-md--inline"><MarkdownView markdown={o} inline /></span></li>)}</ul></div> });
   if (get('teaching')) secs.push({ id: 'idea', label: 'The Idea', heading: 'The core idea', accent: 'blue', body: md(get('teaching')) });
-  if (get('storytelling')) secs.push({ id: 'story', label: 'The Story', heading: 'How the story goes', accent: 'purple', body: md(get('storytelling')) });
   if (get('analogies')) secs.push({ id: 'analogies', label: 'Analogies', heading: 'Ways to picture it', accent: 'teal', body: md(get('analogies')) });
   if (exampleSections.length) secs.push({ id: 'lenses', label: 'In Practice', heading: 'Through three lenses', accent: 'blue', body: <ExamplesGrid sections={exampleSections} /> });
   if (Playground) secs.push({ id: 'lab', label: 'Interactive Lab', heading: 'See it · try it', accent: 'green', body: <Playground /> });
@@ -44,7 +43,9 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
   if (get('misconceptions')) secs.push({ id: 'myths', label: 'Watch Out', heading: 'Common misconceptions', accent: 'pink', body: <MisconceptionsList body={get('misconceptions')!.body} /> });
   if (get('takeaways')) secs.push({ id: 'takeaways', label: 'Recap', heading: 'Key takeaways', accent: 'green', body: <TakeawaysTile body={get('takeaways')!.body} /> });
 
-  const buildNotes = findSections(parsed, ['visual', 'animation', 'playground', 'carbon', 'react']);
+  // Presenter-facing material (teaching script + build/animation/Carbon specs)
+  // lives in a collapsible drawer, not the main learner flow.
+  const presenterNotes = findSections(parsed, ['storytelling', 'visual', 'animation', 'playground', 'carbon', 'react']);
 
   const idx = CORE_MODULES.findIndex((m) => m.slug === mod.slug);
   const prev = idx > 0 ? CORE_MODULES[idx - 1] : undefined;
@@ -78,10 +79,10 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
           </section>
         ))}
 
-        {buildNotes.length > 0 && (
+        {presenterNotes.length > 0 && (
           <details className="difp-buildnotes">
-            <summary>Developer build notes — Carbon, React &amp; animation specs</summary>
-            {buildNotes.map((s, bi) => (
+            <summary>Facilitator notes — teaching script, animation &amp; build specs (presenter only)</summary>
+            {presenterNotes.map((s, bi) => (
               <div key={`${s.key}-${bi}`} style={{ marginTop: '1rem' }}>
                 <h3 style={{ fontSize: '1rem', margin: '0 0 0.4rem' }}>{s.title}</h3>
                 <div className="difp-md difp-md--compact"><MarkdownView markdown={s.body} /></div>
