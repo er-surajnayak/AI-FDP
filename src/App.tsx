@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import ModulePage from './modules/ModulePage';
 
 export default function App() {
-  const [theme, setTheme] = useState<'g100' | 'g10'>('g10');
+  const [theme, setTheme] = useState<'g100' | 'g10'>('g100');
 
   useEffect(() => {
     const dark = theme === 'g100';

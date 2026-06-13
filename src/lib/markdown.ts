@@ -146,6 +146,50 @@ export function splitMisconceptions(body: string): { wrong: string; right: strin
     });
 }
 
+export interface QuizOption { key: string; text: string; correct: boolean; }
+export interface ParsedQuizQ {
+  kind: 'mcq' | 'open';
+  number: string;
+  label: string;
+  question: string;
+  options: QuizOption[];
+  explanation: string;
+}
+
+/** Parse a quiz section body into structured, scorable questions. */
+export function parseQuiz(body: string): ParsedQuizQ[] {
+  const chunks = body.split(/\n(?=\*\*Q\d)/).map((c) => c.trim()).filter(Boolean);
+  return chunks.map((chunk) => {
+    const lines = chunk.split('\n');
+    const head = lines[0];
+    const numM = head.match(/\*\*(Q\d+)\s*\(([^)]*)\)\.?\*\*/);
+    const number = numM ? numM[1] : 'Q';
+    const label = numM ? numM[2] : 'Question';
+    const question = head.replace(/^\*\*Q\d+\s*\([^)]*\)\.?\*\*\s*/, '').replace(/\*\*/g, '').trim();
+
+    const options: QuizOption[] = [];
+    let explanation = '';
+    for (const raw of lines.slice(1)) {
+      const line = raw.trim();
+      const optM = line.match(/^[-*]\s*([A-D])\)\s*(.*)$/);
+      if (optM) {
+        const correct = /✅|✔/.test(optM[2]);
+        const text = optM[2].replace(/✅|✔/g, '').replace(/\*\*/g, '').trim();
+        options.push({ key: optM[1], text, correct });
+      } else if (/^[_*]?(Explanation|Answer)[:_*]/i.test(line)) {
+        explanation = line.replace(/^[_*]?(Explanation|Answer)[:_*]*\s*/i, '').replace(/[_*]+$/g, '').trim();
+      } else if (explanation && line) {
+        explanation += ' ' + line.replace(/[_*]+/g, '').trim();
+      }
+    }
+    return {
+      kind: options.length >= 2 ? 'mcq' : 'open',
+      number, label: label.trim(), question, options,
+      explanation: explanation.replace(/^\*+|\*+$/g, '').trim(),
+    };
+  });
+}
+
 /** Parse a simple "- item" bullet list. */
 export function splitBullets(body: string): string[] {
   return body

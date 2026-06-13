@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
-import { TextArea, Slider, Tag, InlineNotification } from '@carbon/react';
 import { motion } from 'framer-motion';
-import PlaygroundFrame from '../components/PlaygroundFrame';
+import InteractiveLab from '../components/InteractiveLab';
 import { attentionMatrix } from './illustrative';
 
 const DEFAULT = "The animal didn't cross the street because it was too tired";
@@ -11,138 +10,67 @@ export default function SelfAttentionPlayground() {
   const [threshold, setThreshold] = useState(0.08);
   const [focus, setFocus] = useState<number | null>(null);
 
-  const tokens = useMemo(
-    () => text.trim().split(/\s+/).filter(Boolean).slice(0, 18),
-    [text],
-  );
+  const tokens = useMemo(() => text.trim().split(/\s+/).filter(Boolean).slice(0, 18), [text]);
   const weights = useMemo(() => attentionMatrix(tokens), [tokens]);
 
-  const W = 720;
-  const H = 220;
-  const pad = 40;
+  const W = 720, H = 200, pad = 40;
   const step = tokens.length > 1 ? (W - 2 * pad) / (tokens.length - 1) : 0;
   const x = (i: number) => pad + i * step;
-  const baseY = 150;
+  const baseY = 140;
 
   const activeRow = focus != null ? weights[focus] : null;
-  const description =
-    focus != null && activeRow
-      ? `“${tokens[focus]}” attends most strongly to “${
-          tokens[activeRow.indexOf(Math.max(...activeRow.filter((_, j) => j !== focus)))] ?? '—'
-        }”.`
-      : 'Hover or tap a word to see what it attends to.';
+  const strongest =
+    activeRow ? tokens[activeRow.map((w, j) => (j === focus ? -1 : w)).indexOf(Math.max(...activeRow.filter((_, j) => j !== focus)))] : null;
 
   return (
-    <PlaygroundFrame
-      title="Self-Attention Playground"
-      hint="Type a sentence, then hover a word to see its attention. Illustrative weights (cosine of pseudo-embeddings + a coreference heuristic) — not live model inference."
+    <InteractiveLab
+      name="Lab · Self-Attention Explorer"
+      hint="Type a sentence, then hover a word to see what it attends to. Illustrative weights (cosine of pseudo-embeddings + a coreference heuristic) — not live model inference."
+      note={<><b>Teaching simulation:</b> weights are deterministic so the demo is reproducible. Wire a real model via a serverless proxy for live attention maps.</>}
     >
-      <TextArea
-        labelText="Your sentence"
-        rows={2}
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value);
-          setFocus(null);
-        }}
-      />
-
-      <div style={{ margin: '1rem 0', maxWidth: 320 }}>
-        <Slider
-          labelText="Hide weak connections below"
-          min={0}
-          max={0.4}
-          step={0.01}
-          value={threshold}
-          onChange={({ value }) => setThreshold(value)}
-        />
+      <div className="difp-field" style={{ marginBottom: '1rem' }}>
+        <label htmlFor="sa-input">Your sentence</label>
+        <textarea id="sa-input" rows={2} value={text} onChange={(e) => { setText(e.target.value); setFocus(null); }} />
+      </div>
+      <div className="difp-slider" style={{ maxWidth: 320, marginBottom: '1rem' }}>
+        <label>Hide weak links</label>
+        <input type="range" min={0} max={0.4} step={0.01} value={threshold} onChange={(e) => setThreshold(+e.target.value)} />
+        <span className="difp-slider__val">&lt; {threshold.toFixed(2)}</span>
       </div>
 
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        width="100%"
-        role="img"
-        aria-label={description}
-        style={{ maxWidth: '100%' }}
-      >
-        {/* attention arcs from the focused token */}
-        {focus != null &&
-          activeRow!.map((w, j) => {
+      <div className="difp-stage">
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%"
+          role="img" aria-label={strongest ? `“${tokens[focus!]}” attends most strongly to “${strongest}”` : 'Hover a word to see its attention'}>
+          {focus != null && activeRow!.map((w, j) => {
             if (j === focus || w < threshold) return null;
-            const x1 = x(focus);
-            const x2 = x(j);
-            const midX = (x1 + x2) / 2;
-            const arcH = baseY - 40 - Math.min(80, Math.abs(x2 - x1) * 0.35);
+            const x1 = x(focus), x2 = x(j), midX = (x1 + x2) / 2;
+            const arcH = baseY - 30 - Math.min(80, Math.abs(x2 - x1) * 0.35);
             return (
-              <motion.path
-                key={j}
+              <motion.path key={j}
                 d={`M ${x1} ${baseY - 14} Q ${midX} ${arcH} ${x2} ${baseY - 14}`}
-                fill="none"
-                stroke="#4589ff"
-                strokeWidth={1 + w * 10}
-                strokeOpacity={0.25 + w * 0.7}
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.4 }}
-              />
+                fill="none" stroke="var(--c-blue)" strokeWidth={1 + w * 11} strokeOpacity={0.25 + w * 0.7}
+                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4 }} />
             );
           })}
-
-        {/* token labels */}
-        {tokens.map((tok, i) => {
-          const isFocus = i === focus;
-          const w = activeRow ? activeRow[i] : 0;
-          return (
-            <g
-              key={i}
-              transform={`translate(${x(i)}, ${baseY})`}
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setFocus(i)}
-              onClick={() => setFocus(i)}
-            >
-              <rect
-                x={-22}
-                y={-2}
-                width={44}
-                height={22}
-                rx={4}
-                style={{
-                  fill: isFocus
-                    ? 'var(--accent)'
-                    : focus != null
-                      ? `rgba(69,137,255,${0.12 + w * 0.85})`
-                      : 'var(--cds-layer-02, #e8e8e8)',
-                }}
-              />
-              <text
-                textAnchor="middle"
-                y={13}
-                fontSize={11}
-                style={{ pointerEvents: 'none', fill: isFocus ? '#fff' : 'var(--cds-text-primary, #161616)' }}
-              >
-                {tok.length > 9 ? tok.slice(0, 8) + '…' : tok}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-
-      <div style={{ marginTop: '0.75rem' }}>
-        {focus != null ? (
-          <Tag type="blue">{description}</Tag>
-        ) : (
-          <Tag type="gray">Hover a word to begin</Tag>
-        )}
+          {tokens.map((tok, i) => {
+            const isFocus = i === focus;
+            const w = activeRow ? activeRow[i] : 0;
+            return (
+              <g key={i} transform={`translate(${x(i)}, ${baseY})`} style={{ cursor: 'pointer' }}
+                 onMouseEnter={() => setFocus(i)} onClick={() => setFocus(i)}>
+                <rect x={-24} y={-2} width={48} height={23} rx={5}
+                  style={{ fill: isFocus ? 'var(--c-blue)' : focus != null ? `rgba(69,137,255,${0.1 + w * 0.85})` : 'var(--panel-bg-2)', stroke: 'var(--border)' }} />
+                <text textAnchor="middle" y={14} fontSize={11} style={{ pointerEvents: 'none', fontFamily: 'var(--mono)', fill: isFocus ? '#fff' : 'var(--text)' }}>
+                  {tok.length > 9 ? tok.slice(0, 8) + '…' : tok}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
-
-      <InlineNotification
-        kind="info"
-        lowContrast
-        hideCloseButton
-        title="Teaching simulation"
-        subtitle="Weights are illustrative and deterministic so the demo is reproducible. Wire a model via a serverless proxy for live attention."
-        style={{ marginTop: '1rem' }}
-      />
-    </PlaygroundFrame>
+      <p className="difp-lab__hint" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+        {strongest ? `“${tokens[focus!]}” attends most strongly to “${strongest}”.` : 'Hover or tap a word to begin.'}
+      </p>
+    </InteractiveLab>
   );
 }
