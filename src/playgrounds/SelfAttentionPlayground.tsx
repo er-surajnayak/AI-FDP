@@ -26,7 +26,7 @@ export default function SelfAttentionPlayground() {
     <InteractiveLab
       name="Lab · Self-Attention Explorer"
       hint="Type a sentence, then hover a word to see what it attends to. Illustrative weights (cosine of pseudo-embeddings + a coreference heuristic) — not live model inference."
-      note={<><b>Teaching simulation:</b> weights are deterministic so the demo is reproducible. Wire a real model via a serverless proxy for live attention maps.</>}
+      note={<><b>Teaching simulation:</b> the weights are illustrative and deterministic, so the demo is reproducible. A real model computes these from learned Query/Key vectors.</>}
     >
       <div className="difp-field" style={{ marginBottom: '1rem' }}>
         <label htmlFor="sa-input">Your sentence</label>
