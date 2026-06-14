@@ -174,11 +174,14 @@ Attention lets a model decide: *"Which parts of the input should I focus on righ
 - **Outcome:** participants discover that *their own* sentences produce sensible relationship maps — pronouns find antecedents, adjectives find nouns.
 
 ## 13. Hands-on Activity ✋
-**"Be the attention head."** (8 min.) Give participants the sentence *"The professor told the student that she had won the award."* In pairs, they (1) decide what "she" refers to and argue why, (2) draw arcs by hand for 3 chosen words, (3) compare with the playground's output and discuss disagreements (this sentence is *genuinely ambiguous* — a great discussion of how context/priors drive attention). *Goal: feel that attention is contextual relevance, and that ambiguity is real.*
+Some sentences are genuinely ambiguous, and that is the point. In *"The professor told the student that she had won the award,"* the pronoun "she" could be the professor or the student — nothing in the grammar settles it. A human reaches for context and world-knowledge; a model does the same thing by weighting the surrounding words. Change the ending and the balance tips: *"…that she had won the teaching award"* leans toward the professor, while *"…that she had won the scholarship"* leans toward the student.
+
+Attention is exactly this — relevance assigned in context. When the context is silent, the ambiguity is real for the model too, which is why the same pronoun can resolve two different ways.
 
 ## 14. Demonstration Ideas
-- Ask an LLM the ambiguous "she" sentence: "Who does 'she' refer to, and why?" Then add a disambiguating clause and re-ask — show the resolution shift. Connect to "attention re-weighted given new context."
-- Show a public attention-visualization tool (e.g., a BertViz-style demo) for a "real model" moment.
+Asked the bare sentence — *"Who does 'she' refer to, and why?"* — a capable model hedges, because the sentence is honestly ambiguous. Add a disambiguating clause and the resolution shifts: the new words re-weight the attention and the pronoun snaps to one antecedent.
+
+That shift, visible in the lab above, is the whole idea in miniature. Meaning is not fixed per word; it is assigned by the surrounding context, and new context re-weights it.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** In the Q/K/V metaphor, the **Value** is best described as:
@@ -198,6 +201,15 @@ Attention lets a model decide: *"Which parts of the input should I focus on righ
 **Q3 (Conceptual).** Why do Transformers use *multiple* attention heads? *Answer:* so different heads can specialize in different relationship types (grammar, coreference, topic) simultaneously, then combine them.
 
 **Q4 (Scenario).** A model answering a question over a 20-page document correctly cites a fact from page 2. Explain in attention terms. *Answer:* the question tokens' Queries matched the Keys of the page-2 fact strongly, so its Value dominated the answer's representation — a direct long-range link, no fading.
+
+**Q5 (MCQ).** In *"The animal didn't cross the street because it was too tired,"* what makes "it" resolve to "animal"?
+- A) "animal" is the closest noun to "it"
+- B) **"tired" describes a living thing, so meaning — not distance — selects "animal"** ✅
+- C) "it" always refers to the first noun in a sentence
+- D) The model has memorised this exact sentence
+*Explanation:* proximity would wrongly pick "street"; attention weighs meaning, and "tired" fits an animate antecedent.
+
+**Q6 (Conceptual).** Why is "attention is just keyword matching" wrong? *Answer:* matching happens over *learned* representations (Queries and Keys), not literal strings — so "it" can match "animal" and "automobile" can match "car" with no shared characters. Relevance is learned, not lexical.
 
 ## 16. Common Misconceptions ⚠️
 - **"Attention is just keyword matching."** It's *learned* relevance over rich representations, not literal string matching.

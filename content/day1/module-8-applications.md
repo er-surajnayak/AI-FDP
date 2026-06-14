@@ -88,11 +88,14 @@ Covered per-domain above; the **Consultancy** block supplies the consultancy exa
 **Prompt Lab.** A `TextArea` prompt with toggleable C.R.A.F.T. scaffolding chips; selecting a domain template pre-fills a strong starting prompt; a "verification checklist" appears beside any generated output (facts? citations? bias? privacy? disclosure?). Drive live via a Vercel serverless proxy, or paste outputs from the room's own tools.
 
 ## 13. Hands-on Activities ✋
-The four 10-minute domain activities above are the core. A capstone (5 min): pick the single workflow you'll actually adopt next week and write the C.R.A.F.T. prompt for it.
+The single most transferable skill across every domain is structuring a prompt rather than just asking. The C.R.A.F.T. pattern names the parts of a strong request — **C**ontext, **R**ole, **A**ction, **F**ew-shot example, **T**est — and the same five parts work whether you are drafting a rubric, summarising a paper, writing a consultancy proposal, or triaging support tickets.
+
+The shift it encodes is the real lesson of the day: the human's job moves from *producing the first draft* to *specifying the request well and verifying the result*.
 
 ## 14. Demonstration Ideas
-- Run the four domain demo prompts live (ChatGPT/Claude/Gemini), each followed by a **verification pass** — model the discipline you're teaching.
-- Show a deliberately under-specified prompt vs. a C.R.A.F.T. prompt for the same task → night-and-day difference.
+The difference a structure makes is stark when you see the same task twice. A bare prompt — *"write a rubric for an essay"* — returns something generic. The same task wrapped in C.R.A.F.T. — who the students are, what level, the exact criteria and format, an example of the tone you want, and a request to flag anything debatable — returns something you can almost use as-is.
+
+Across teaching, research, consultancy, and industry the pattern is identical: a few sentences of structure turn a vague answer into a usable draft — which still gets verified before it is owned.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** The safest default stance toward AI output is:
@@ -107,6 +110,15 @@ The four 10-minute domain activities above are the core. A capstone (5 min): pic
 **Q3 (Conceptual).** Name three elements of a strong prompt (C.R.A.F.T.). *Answer:* any three of Context, Role, Action, Few-shot example, Test/verify.
 
 **Q4 (Scenario).** A consultant pastes confidential client notes into a free chatbot to draft a proposal. What's wrong, and what should they do? *Answer:* confidentiality/data-governance violation; use an approved tool with no-retention terms or a self-hosted model, and anonymize where possible.
+
+**Q5 (MCQ).** In C.R.A.F.T., the "T" (Test) element asks the model to:
+- A) Run a unit test on your code
+- B) **Flag its own uncertainty or check its work for disputable claims** ✅
+- C) Raise the temperature setting
+- D) Translate the output into another language
+*Explanation:* "Test" builds verification into the prompt — the model surfaces what a human should double-check.
+
+**Q6 (Scenario).** The same C.R.A.F.T. structure is claimed to work for a biology lecturer and an industry support team alike. Why does one pattern generalise? *Answer:* every task needs the same things specified — situation (Context), perspective (Role), the precise ask (Action), a quality example (Few-shot), and a verification step (Test). Only the content of each slot changes, not the structure.
 
 ## 16. Common Misconceptions ⚠️
 - **"AI will replace faculty/researchers."** It shifts effort from drafting to directing/verifying; judgment and accountability remain human.

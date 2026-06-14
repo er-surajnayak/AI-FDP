@@ -92,11 +92,14 @@ Embed a query and a corpus of documents, then find the documents whose vectors a
 - **Outcome:** participants experience analogies *and* their limits firsthand — exactly the critical stance a PhD audience should take.
 
 ## 13. Hands-on Activity ✋
-**"Cluster the concepts."** (8 min.) Give 15 cards with words from mixed domains (research, teaching, finance, cooking). In pairs, participants physically/visually group them, then compare with the embedding map. Then they propose one analogy (A−B+C) and predict the answer before testing it. Discuss a case where the embedding *disagrees* with intuition (often a bias or polysemy case). *Goal: internalize clustering and confront limitations.*
+Words with related meanings land near each other in embedding space, so concepts form clusters on their own — research terms in one neighbourhood, cooking terms in another, finance in a third — without anyone labelling them.
+
+Because directions in this space are meaningful, you can do arithmetic on meaning: "king − man + woman" lands near "queen" because the "royalty" and "gender" relationships are consistent directions. But the magic has limits worth naming. Analogies are approximate and model-dependent, and the same geometry that captures meaning also captures human bias from the training text. The right stance is to use the structure and stay sceptical of it.
 
 ## 14. Demonstration Ideas
-- Live: ask an LLM "Give 10 words most similar to 'pedagogy' and 10 most similar to 'thermodynamics'" — show the two clean clusters.
-- Show a known analogy that *fails* and ask the room why — leads naturally into bias and polysemy.
+Ask for the words most similar to "pedagogy" and the words most similar to "thermodynamics," and you get two clean, separate clusters — the space has organised meaning with no supervision.
+
+The more instructive moment is a *failed* analogy. Many "A − B + C" queries return something subtly wrong, often revealing a polysemy (a word with two senses) or a societal bias baked into the data. Those failures are not bugs to hide — they are the clearest evidence that an embedding is a statistical mirror of its training text, not a dictionary.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** In an embedding space, two words are semantically similar when their vectors are:
@@ -116,6 +119,15 @@ Embed a query and a corpus of documents, then find the documents whose vectors a
 **Q3 (Conceptual).** Why are modern (contextual) embeddings better than one-vector-per-word? *Answer:* the same word gets *different* vectors depending on context (e.g., "bank" by a river vs. a loan), capturing polysemy.
 
 **Q4 (Scenario).** You want a chatbot to answer from your institution's policy PDFs accurately. How do embeddings help? *Answer:* embed the PDFs and the user's question, retrieve the nearest passages by vector similarity, and feed those to the LLM (RAG) so the answer is grounded in real documents.
+
+**Q5 (MCQ).** Two documents about unrelated topics will have embedding vectors that are:
+- A) Identical
+- B) **Far apart — low cosine similarity** ✅
+- C) Exactly the same length
+- D) Always perfectly perpendicular by design
+*Explanation:* distance encodes dissimilarity, so unrelated content sits far apart in the space.
+
+**Q6 (Scenario).** A semantic search returns a passage that shares no keywords with the query yet is clearly relevant. How? *Answer:* retrieval matches on *meaning* via vector proximity, not literal words — the query and passage embed to nearby points even with different vocabulary (e.g., "car" and "automobile").
 
 ## 16. Common Misconceptions ⚠️
 - **"Embeddings store dictionary definitions."** No — they encode *usage-based* relationships; they don't "look up" meanings.

@@ -124,10 +124,14 @@ This architecture became the foundation for **GPT, Claude, Gemini, Llama, and De
 - **Outcome:** participants experiment and discover the breaking point of recurrence themselves.
 
 ## 13. Hands-on Activity ✋
-**"Find the long-range dependency."** (6 min, individual then pairs.) Give 3 sentences, each with a word whose meaning depends on a distant word (e.g., pronoun resolution across a long clause). Participants underline the dependency and rate how hard it'd be for a "fading memory" reader. Discuss why distance is the enemy of recurrence. *Goal: internalize "long-range dependency" through their own analysis.*
+A *long-range dependency* is when a word's meaning hinges on another word far away in the sentence. Consider: *"The keys to the cabinet that the new lab assistant had carefully organised last week **were** missing."* The verb "were" agrees with "keys" — seven words back — not with the nearer "assistant."
+
+A reader with a fading memory would lose "keys" by the time it reaches the verb. Recurrence is exactly that fading reader: it passes meaning from word to word, so the further apart two related words are, the weaker the signal that survives. Distance is the enemy of recurrence — and the problem attention was built to solve.
 
 ## 14. Demonstration Ideas
-- Paste a deliberately long, clause-heavy sentence into an LLM and ask "What does 'it' refer to?" It resolves correctly across the distance — then explain that attention, not a fading notebook, is doing the work.
+Take a long, clause-heavy sentence — *"The trophy wouldn't fit in the brown suitcase because it was too big"* stretched across extra clauses — and the pronoun "it" still resolves correctly no matter how much text sits between.
+
+A recurrent model struggles as the gap grows; a Transformer does not, because attention links "it" directly to its antecedent in a single step, with no distance to fade across. The cost of reaching back — one word away or fifty — is the same, and that is what makes the architecture so powerful.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** The Transformer's *parallelism* advantage comes from:
@@ -147,6 +151,15 @@ This architecture became the foundation for **GPT, Claude, Gemini, Llama, and De
 **Q3 (Conceptual).** Name the *two* limitations of RNN/LSTM that Transformers address. *Answer:* (1) sequential processing → no parallelism; (2) degrading long-range memory.
 
 **Q4 (Scenario).** A researcher's model forgets the topic introduced in a document's first paragraph by the time it reaches the last. Which limitation is this, and which architecture mitigates it? *Answer:* long-range dependency loss; the Transformer (via attention) connects distant positions directly.
+
+**Q5 (MCQ).** In an RNN, why does information from early in a long sequence tend to get lost?
+- A) The vocabulary is too small
+- B) **It must pass through every intermediate step, weakening at each one** ✅
+- C) RNNs ignore the first token by design
+- D) Attention overwrites it
+*Explanation:* recurrence is a relay; the signal degrades with each hand-off, so distant context fades.
+
+**Q6 (Conceptual).** The 2017 paper "Attention Is All You Need" removed recurrence entirely. What two practical wins did that unlock? *Answer:* (1) full parallelism — the whole sequence is processed at once, so training scales on GPUs; (2) direct, constant-cost links between any two positions, so long-range dependencies no longer fade.
 
 ## 16. Common Misconceptions ⚠️
 - **"LSTMs solved the memory problem."** They *mitigated* it; very long ranges still degrade, and they remain sequential.

@@ -317,6 +317,25 @@ body {
 }
 .difp-seg button:hover { border-color: var(--accent); color: var(--text); }
 .difp-seg button.is-active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Concept visuals (in place of the old facilitator instructions) */
+.difp-cv { margin: 0; }
+.difp-cv__stage { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.difp-cv__cap { font-family: var(--sans); font-size: 0.92rem; line-height: 1.55; color: var(--text-dim); margin: 0.8rem 0 0; max-width: 68ch; }
+.difp-cv__toggles { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.85rem; }
+.difp-cv__toggles span { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
+.difp-cv__toggles button {
+  font-family: var(--sans); font-size: 0.8rem; padding: 0.32rem 0.7rem; border-radius: 6px;
+  border: 1px solid var(--border-strong); background: var(--panel-bg-2); color: var(--text-dim); cursor: pointer;
+}
+.difp-cv__toggles button:hover { border-color: var(--accent); color: var(--text); }
+.difp-cv__toggles button.is-active { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+.difp-craft { display: flex; flex-direction: column; gap: 0.6rem; }
+.difp-craft__row { display: flex; gap: 0.8rem; align-items: flex-start; border-left: 3px solid; padding: 0.5rem 0 0.5rem 0.85rem; }
+.difp-craft__badge { flex: none; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 6px; color: #161616; font-family: var(--mono); font-weight: 700; font-size: 0.95rem; }
+.difp-craft__label { font-family: var(--sans); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.1rem; }
+.difp-craft__text { font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; color: var(--text-dim); }
 .difp-field label { display: block; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 0.35rem; }
 .difp-field textarea, .difp-field select {
   width: 100%; background: var(--page-bg); border: 1px solid var(--border); border-radius: 6px;

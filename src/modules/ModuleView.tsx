@@ -12,6 +12,7 @@ import ScoredQuiz from '../components/ScoredQuiz';
 import MisconceptionsList from '../components/MisconceptionsList';
 import TakeawaysTile from '../components/TakeawaysTile';
 import { PLAYGROUNDS } from '../playgrounds/registry';
+import { CONCEPT_VISUALS } from './ConceptVisuals';
 
 type Accent = 'blue' | 'green' | 'yellow' | 'purple' | 'pink' | 'teal';
 interface Sec { id: string; label: string; heading: string; accent: Accent; body: ReactNode; }
@@ -22,6 +23,7 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
   const get = (k: SectionKey) => findSection(parsed, k);
 
   const Playground = mod.playground ? PLAYGROUNDS[mod.playground] : null;
+  const Visual = CONCEPT_VISUALS[mod.slug] ?? null;
   const objectives = get('objectives');
   const objList = objectives ? splitBullets(objectives.body) : [];
   const exampleSections = findSections(parsed, ['faculty', 'research', 'industry']).filter((s) => s.body.length > 20);
@@ -37,8 +39,9 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
   if (get('analogies')) secs.push({ id: 'analogies', label: 'Analogies', heading: 'Ways to picture it', accent: 'teal', body: md(get('analogies')) });
   if (exampleSections.length) secs.push({ id: 'lenses', label: 'In Practice', heading: 'Through three lenses', accent: 'blue', body: <ExamplesGrid sections={exampleSections} /> });
   if (Playground) secs.push({ id: 'lab', label: 'Interactive Lab', heading: 'See it · try it', accent: 'green', body: <Playground /> });
-  if (get('activity')) secs.push({ id: 'handson', label: 'Hands-On', heading: 'Do it yourself', accent: 'yellow', body: md(get('activity')) });
-  if (get('demo')) secs.push({ id: 'demo', label: 'Live Demo', heading: 'Show the room', accent: 'pink', body: md(get('demo')) });
+  if (Visual) secs.push({ id: 'picture', label: 'Picture It', heading: 'See the idea', accent: 'purple', body: <Visual /> });
+  if (get('activity')) secs.push({ id: 'closer', label: 'Going Deeper', heading: 'A closer look', accent: 'teal', body: md(get('activity')) });
+  if (get('demo')) secs.push({ id: 'practice', label: 'In the Wild', heading: 'Seeing it for real', accent: 'pink', body: md(get('demo')) });
   if (get('quiz')) secs.push({ id: 'quiz', label: 'Check Yourself', heading: 'Quiz yourself', accent: 'yellow', body: <ScoredQuiz body={get('quiz')!.body} /> });
   if (get('misconceptions')) secs.push({ id: 'myths', label: 'Watch Out', heading: 'Common misconceptions', accent: 'pink', body: <MisconceptionsList body={get('misconceptions')!.body} /> });
   if (get('takeaways')) secs.push({ id: 'takeaways', label: 'Recap', heading: 'Key takeaways', accent: 'green', body: <TakeawaysTile body={get('takeaways')!.body} /> });

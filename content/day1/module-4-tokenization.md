@@ -95,11 +95,14 @@ A model can only "see" a fixed number of tokens at once — its **context window
 - **Outcome:** participants compute the cost of *their own* real prompts and feel the per-token economics.
 
 ## 13. Hands-on Activity ✋
-**"Guess the token count."** (6 min.) Show 5 strings (a tweet, a paragraph, a code snippet, a non-English sentence, a chemistry formula). Participants *guess* token counts, then reveal with the counter. Discuss why code and non-English skew high. *Goal: calibrate intuition that tokens ≠ words and vary by content.*
+Tokens are not words. A token is a frequent chunk of characters — sometimes a whole word, often a piece of one. Common English runs about three-quarters of a word per token, but the ratio swings wildly with content.
+
+Code is full of rare symbols and indentation, so it fragments into many tokens. Non-English and technical text break into smaller pieces because the model saw them less often during training. A chemistry formula like "C₆H₁₂O₆" may cost several tokens for what looks like a single term. The practical upshot: you cannot eyeball cost or length by counting words — the same paragraph can be cheap or expensive depending on what is in it.
 
 ## 14. Demonstration Ideas
-- Live cost calc: "Summarize this 30-page report daily for a year" → tokens × price × 365. A vivid budgeting moment for administrators.
-- Paste an over-long history into a chat and show it "forgetting" the first instruction → explain eviction.
+Two consequences make tokens concrete. The first is **cost**: every token in and out is billed, so a task like "summarise this 30-page report every day for a year" multiplies into millions of tokens. Token count is a budget line, not a technicality.
+
+The second is **memory**: the context window is one fixed budget shared by the system prompt, your input, the conversation history, and the reply. When a conversation grows past it, the oldest turns are silently evicted — which is why a long chat can "forget" an instruction you gave at the start.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** Roughly how many English words is 100 tokens?
@@ -116,6 +119,15 @@ A model can only "see" a fixed number of tokens at once — its **context window
 **Q3 (Conceptual).** Why sub-word tokens instead of whole words? *Answer:* a manageable vocabulary that can compose any word (including unseen/rare ones and typos) from known pieces, handling morphology efficiently.
 
 **Q4 (Scenario).** A 50-page contract won't fit a model's window. Two strategies? *Answer:* (1) chunk it and summarize/retrieve relevant parts (RAG); (2) use a longer-context model — at higher cost and with possible mid-context attention dilution.
+
+**Q5 (MCQ).** Which input is likely to use the *most* tokens for the same visible length?
+- A) A simple English sentence
+- B) **A snippet of source code** ✅
+- C) A list of common words
+- D) A short greeting
+*Explanation:* code's rare symbols, whitespace, and identifiers fragment into many small tokens.
+
+**Q6 (Conceptual).** A model has a 128k-token context window. Does that mean it "remembers" everything across a long chat? *Answer:* only within that single window — once the running total of prompt + history + reply exceeds it, the oldest tokens are dropped. Nothing persists beyond the window unless it is re-supplied.
 
 ## 16. Common Misconceptions ⚠️
 - **"One word = one token."** Often false — rare/long words split; spaces and punctuation count.

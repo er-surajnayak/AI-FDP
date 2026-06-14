@@ -92,11 +92,14 @@ Each model has strengths and limitations. Selecting the right one depends on the
 As **B** above: a `RadioButtonGroup`/`Dropdown` questionnaire → weighted scoring → ranked recommendation with transparent "why." Include a "Show my constraints" summary so the reasoning is auditable (important for an academic audience that distrusts black-box advice).
 
 ## 13. Hands-on Activity ✋
-**"Pick a model for your real task."** (8 min.) Each participant writes one genuine task from their work, runs it through the selector, and notes whether they agree with the recommendation and why/why not. Pairs debate one disagreement. *Goal: transfer the framework to authentic decisions and surface that constraints, not hype, drive the choice.*
+Choosing a model is not ranking them — it is matching a task to constraints. The questions that actually decide it: *How sensitive is the data?* (confidential research may rule out any third-party API). *How much context do you need at once?* (a 200-page report needs a long window). *What is the budget per call, at what volume?* *Do you need deep multi-step reasoning, or fast and cheap?* *Do you need to self-host for control, or is managed convenience fine?*
+
+Different answers point to different models — and the "best benchmark score" rarely survives contact with a real constraint like privacy or cost.
 
 ## 14. Demonstration Ideas
-- Run the *same* prompt across two accessible models (e.g., ChatGPT vs. Claude vs. Gemini) side by side; discuss differences in style, structure, refusals, and length — concretely, not as a "winner."
-- Show an open-weight model running locally (if infra available) to make "self-hosted / data stays here" tangible.
+The same prompt sent to two leading models comes back with visibly different style, structure, length, and willingness to refuse — not a "winner," but distinct personalities suited to different jobs.
+
+The other revealing case is an open-weight model running on local hardware: it makes "the data never leaves this machine" tangible, which for a governance-bound institution can matter more than any capability gap. Seeing both side by side reframes the question from *"which is best?"* to *"best for what, under which constraints?"*
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** "Foundation model" primarily means a model that is:
@@ -116,6 +119,15 @@ As **B** above: a `RadioButtonGroup`/`Dropdown` questionnaire → weighted scori
 **Q3 (Conceptual).** Name two reasons an institution might choose an open-weight model over a frontier API. *Answer:* data stays in-house (privacy/governance) and no per-token cost / full customization — at the price of running the infrastructure and a possible quality gap.
 
 **Q4 (Scenario).** You must summarize 200-page reports weekly on a tight budget with non-sensitive data. Which axes dominate, and what class of model? *Answer:* long context + cost-efficiency dominate; a long-context model with low per-token price, or a self-hosted long-context open model.
+
+**Q5 (MCQ).** Two teams pick different models for the "same" summarisation task. The most likely reason is:
+- A) One team simply made a mistake
+- B) **Their constraints differ — data sensitivity, budget, context length, or hosting** ✅
+- C) Only one of the models can summarise text
+- D) Benchmark results are random
+*Explanation:* model choice is driven by constraints, so different constraints rightly lead to different choices.
+
+**Q6 (Conceptual).** "Open-weight" and "open-source" are not the same — why isn't every open-weight model fully open-source? *Answer:* open *weights* means you can download and run the parameters, but the training data, code, and licence may still be restricted — so you gain deployability and privacy without necessarily full transparency or unrestricted use.
 
 ## 16. Common Misconceptions ⚠️
 - **"There's one best model."** No — best is task- and constraint-dependent; standings change monthly.

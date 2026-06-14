@@ -107,11 +107,14 @@ The model optimises for **plausibility**, not **truth**. A confidently-worded bu
 Combine B + C: type a short prompt, set temperature, and watch the response assemble token by token with live probability bars and visible sampling — the capstone interactive of Day 1.
 
 ## 13. Hands-on Activity ✋
-**"Predict the next token."** (8 min.) Show 5 prompts (e.g., "The mitochondria is the powerhouse of the ___"). Participants write their top-3 predicted next tokens with rough probabilities, then compare with the simulator. Then set temperature high and low on one prompt and predict how outputs differ. *Goal: internalize next-token prediction and temperature.*
+At its core an LLM does one thing: given everything so far, it predicts a probability distribution over the next token, picks one, appends it, and repeats. For "The mitochondria is the powerhouse of the ___," the token "cell" carries almost all the probability; for an open-ended prompt, dozens of tokens share it.
+
+**Temperature** controls how the pick is made. Low temperature almost always takes the top token, giving focused, repeatable text. High temperature flattens the distribution so less likely tokens get a chance, giving variety and surprise — and more risk of going off the rails. Everything an LLM writes is this loop running hundreds of times.
 
 ## 14. Demonstration Ideas
-- In a real chat UI, run the same prompt 3× at default temperature → different outputs; then (if the tool allows) at temperature 0 → identical. 
-- Ask for "5 references on X," then ask "verify each reference exists." Surface a hallucinated citation live → teach verification.
+Running the same prompt several times at a normal temperature gives different answers each time — proof that generation is sampling from a distribution, not retrieving a fixed reply. At temperature zero, the outputs become near-identical.
+
+The same mechanism explains **hallucination**. Asked for five references, a model will happily produce five plausibly-formatted citations whether or not they exist, because it is optimising for likely-looking text, not for truth. Plausibility is not verification — which is why every factual output needs a check.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** An LLM fundamentally generates text by:
@@ -131,6 +134,15 @@ Combine B + C: type a short prompt, set temperature, and watch the response asse
 **Q3 (Conceptual).** Why can the same prompt give different answers? *Answer:* with temperature > 0, token selection is stochastic; at temperature 0 it's (near-)deterministic.
 
 **Q4 (Scenario).** You need reliable, repeatable extraction of dates from 1,000 documents. What settings, and why? *Answer:* low/zero temperature (deterministic, focused) + a constrained output format; pair with verification — plausibility ≠ truth.
+
+**Q5 (MCQ).** At temperature 0, an LLM given the identical prompt twice will:
+- A) Always refuse the second time
+- B) **Produce (near-)identical output both times** ✅
+- C) Get progressively more creative
+- D) Expand its context window
+*Explanation:* temperature 0 always takes the highest-probability token, making generation deterministic.
+
+**Q6 (Conceptual).** Why does an LLM sometimes invent a confident, well-formatted fact that is simply false? *Answer:* it generates the most *likely-looking* next tokens with no built-in check against reality — fluent and plausible is the objective, not true, so a fabricated citation is as easy to produce as a real one.
 
 ## 16. Common Misconceptions ⚠️
 - **"The model plans the whole answer first."** No — it predicts token by token; structure emerges from the loop.

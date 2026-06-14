@@ -111,10 +111,18 @@ Those better architectures are where the next module begins.
 - **Controls:** Carbon `Toggle` (Rules/Examples), `Button` to add a labeled example, a live accuracy `meter`.
 
 ## 13. Hands-on Activity ✋
-**"Classify your discipline."** In pairs (5 min): each participant names a task from their own field and classifies it as best solved by (a) explicit rules, (b) classical ML, or (c) deep learning — and justifies why. Share two examples with the room. *Goal: transfer the framework to their own world immediately.*
+Every task a machine can help with falls into one of three buckets, and knowing which one you are in tells you what kind of system you need.
+
+- **Explicit rules** — the logic is fully known and stable, so you can simply write it down. *Detecting a leap year; validating an email format.*
+- **Classical ML** — the rules are too fuzzy to write by hand, but the useful *features* are knowable. *Predicting student drop-out from attendance, grades, and fee history.*
+- **Deep learning** — even the features are hard to name; the signal lives in raw pixels, audio, or text. *Reading handwriting; transcribing a lecture; summarising a paper.*
+
+The same field spans all three. In a chemistry lab, balancing an equation is rules; predicting a reaction yield from tabulated properties is classical ML; reading a hand-drawn molecular structure is deep learning.
 
 ## 14. Demonstration Ideas
-- Live: ask an LLM "Write 5 if/else rules to detect sarcasm," then "Now explain why this approach fails." The model itself articulates the motivation for learning-based methods — a memorable, self-referential demo.
+Sarcasm shows why hand-written rules hit a wall. You could try to capture it in if/else logic — *if the literal sentiment is positive but the context is negative, flag it* — but every rule has a thousand exceptions, and tone, timing, and shared knowledge all matter.
+
+This is exactly the problem deep learning solves: instead of enumerating rules for an open-ended pattern, it learns the pattern from millions of examples. The cases that defeat rule-writing — sarcasm, faces, speech, translation — are precisely the ones where learning from data took over.
 
 ## 15. Quiz Questions ❓
 **Q1 (MCQ).** In the machine-learning paradigm, what does the machine *produce*?
@@ -134,6 +142,15 @@ Those better architectures are where the next module begins.
 **Q3 (Conceptual).** In one sentence, what disappears in deep learning that was central to classical ML? *Answer:* manual **feature engineering** — the network learns its own features from raw data.
 
 **Q4 (Scenario).** A colleague says "AI is just a fancy name for deep learning." Correct them in two sentences. *Answer:* AI is the broad goal (including rule-based systems); deep learning is one recent, powerful *subset* of machine learning, which is itself a subset of AI.
+
+**Q5 (MCQ).** Which task is best suited to *classical machine learning* rather than hand-written rules or deep learning?
+- A) Checking whether a number is even
+- B) **Predicting house prices from features like size, location, and age** ✅
+- C) Transcribing speech from raw audio
+- D) Validating a date format
+*Explanation:* classical ML fits when the useful features are known and tabular but the mapping to an answer is too complex to write by hand.
+
+**Q6 (Conceptual).** Why did deep learning "win" around 2012 and not a decade earlier? *Answer:* three enablers converged — massive labelled datasets, GPU parallel compute cheap enough to train large networks, and better architectures — and none of them was sufficient alone.
 
 ## 16. Common Misconceptions ⚠️
 - **"DL replaced AI/ML."** No — they're nested. Rule-based and classical ML systems are still widely used and often better for small-data or high-interpretability problems.
