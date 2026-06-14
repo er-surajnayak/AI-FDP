@@ -7,4 +7,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: { port: 5173 },
+  // @huggingface/transformers ships its own WASM/worker assets; pre-bundling it
+  // breaks those references, so let Vite load it as-is.
+  optimizeDeps: { exclude: ['@huggingface/transformers'] },
 });
