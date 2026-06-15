@@ -1,7 +1,7 @@
 import type { ModuleMeta, ModuleKind, PlaygroundKey, DayMeta } from '../content-types';
 
-// Eagerly import every Day-1 markdown file as a raw string.
-const files = import.meta.glob('../../content/day1/*.md', {
+// Eagerly import every day's markdown file as a raw string.
+const files = import.meta.glob('../../content/day*/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -76,6 +76,30 @@ const DEFS: ModuleDef[] = [
     topics: ['C.R.A.F.T. prompts', '4 domains', 'Verify & disclose'],
   },
   {
+    slug: 'day2-module-1-prompting', day: 2, navLabel: 'Prompting', title: 'Prompting Techniques',
+    number: '01', durationMin: 50, kind: 'module', file: 'day2-module-1-prompting.md', playground: 'prompt-explorer',
+    blurb: 'Same model, better answers — zero-shot, few-shot, chain-of-thought, roles, structure.',
+    topics: ['Few-shot', 'Chain-of-thought', 'Role & structure'],
+  },
+  {
+    slug: 'day2-module-2-vibe-coding', day: 2, navLabel: 'Vibe Coding', title: 'Vibe Coding',
+    number: '02', durationMin: 45, kind: 'module', file: 'day2-module-2-vibe-coding.md', playground: 'vibe-coding',
+    blurb: 'Building software by describing it — the loop, the tools, the pros, the cons, the limits.',
+    topics: ['The loop', 'Tools', 'When it works'],
+  },
+  {
+    slug: 'day2-module-3-rag', day: 2, navLabel: 'RAG', title: 'Retrieval-Augmented Generation',
+    number: '03', durationMin: 50, kind: 'module', file: 'day2-module-3-rag.md', playground: 'rag-pipeline',
+    blurb: 'Ground the model in your own documents — retrieve, augment, generate, cite.',
+    topics: ['Grounding', 'The pipeline', 'Citations'],
+  },
+  {
+    slug: 'day2-module-4-vector-db', day: 2, navLabel: 'Vector Databases', title: 'Vector Databases',
+    number: '04', durationMin: 45, kind: 'module', file: 'day2-module-4-vector-db.md', playground: 'vector-search',
+    blurb: 'The searchable memory behind RAG — similarity, nearest-neighbour search, and the tools.',
+    topics: ['Similarity search', 'ANN / HNSW', 'Pinecone · pgvector'],
+  },
+  {
     slug: 'overview', day: 1, navLabel: 'Day 1 Overview', title: 'Day 1 — From Deep Learning to LLMs',
     durationMin: 360, kind: 'overview', file: '00-overview.md',
     blurb: 'The framing, objectives, and narrative arc for the whole day.',
@@ -117,7 +141,7 @@ export const MODULES: ModuleMeta[] = DEFS.map((d) => ({
 
 export const DAYS: DayMeta[] = [
   { day: 1, title: 'From Deep Learning to LLMs', subtitle: 'Foundations of Generative AI', status: 'live' },
-  { day: 2, title: 'Prompting, RAG & Tooling', subtitle: 'Getting reliable results from LLMs', status: 'coming-soon' },
+  { day: 2, title: 'Prompting, Vibe Coding & RAG', subtitle: 'Getting real work done with LLMs', status: 'live' },
   { day: 3, title: 'Agents & Building with LLMs', subtitle: 'From chat to autonomous workflows', status: 'coming-soon' },
   { day: 4, title: 'Responsible & Institutional AI', subtitle: 'Ethics, governance, and rollout', status: 'coming-soon' },
 ];

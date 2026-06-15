@@ -6,6 +6,10 @@ import TokenizerPlayground from './TokenizerPlayground';
 import TemperaturePlayground from './TemperaturePlayground';
 import LlmPipeline from './LlmPipeline';
 import EmbeddingPlayground from './EmbeddingPlayground';
+import PromptExplorer from './PromptExplorer';
+import VibeCoding from './VibeCoding';
+import RagPipeline from './RagPipeline';
+import VectorSearch from './VectorSearch';
 
 export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
   'evolution-timeline': EvolutionTimeline,
@@ -21,4 +25,8 @@ export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
     </>
   ),
   embedding: EmbeddingPlayground,
+  'prompt-explorer': PromptExplorer,
+  'vibe-coding': VibeCoding,
+  'rag-pipeline': RagPipeline,
+  'vector-search': VectorSearch,
 };

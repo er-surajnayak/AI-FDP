@@ -5,9 +5,9 @@ import type { ModuleMeta, DayMeta } from '../content-types';
 
 const STATS = [
   { value: '4', label: 'Days' },
-  { value: '8', label: 'Day-1 Modules' },
-  { value: '6', label: 'Interactive Labs' },
-  { value: '8', label: 'Hands-on Activities' },
+  { value: '12', label: 'Modules' },
+  { value: '10', label: 'Interactive Labs' },
+  { value: '2', label: 'Days Live' },
 ];
 
 export default function HomePage() {

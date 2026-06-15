@@ -7,7 +7,11 @@ export type PlaygroundKey =
   | 'tokenizer'
   | 'temperature'
   | 'llm-pipeline'
-  | 'embedding';
+  | 'embedding'
+  | 'prompt-explorer'
+  | 'vibe-coding'
+  | 'rag-pipeline'
+  | 'vector-search';
 
 export type ModuleKind = 'overview' | 'module' | 'doc';
 
