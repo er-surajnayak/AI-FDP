@@ -36,10 +36,10 @@ export default function ModuleView({ mod }: { mod: ModuleMeta }) {
     secs.push({ id: 'objectives', label: 'Orientation', heading: "What you'll be able to do", accent: 'blue',
       body: <div className="difp-objectives"><ul>{objList.map((o, i) => <li key={i}><span className="difp-md difp-md--inline"><MarkdownView markdown={o} inline /></span></li>)}</ul></div> });
   if (get('teaching')) secs.push({ id: 'idea', label: 'The Idea', heading: 'The core idea', accent: 'blue', body: md(get('teaching')) });
+  if (Visual) secs.push({ id: 'picture', label: 'Picture It', heading: 'The big picture', accent: 'purple', body: <Visual /> });
   if (get('analogies')) secs.push({ id: 'analogies', label: 'Analogies', heading: 'Ways to picture it', accent: 'teal', body: md(get('analogies')) });
   if (exampleSections.length) secs.push({ id: 'lenses', label: 'In Practice', heading: 'Through three lenses', accent: 'blue', body: <ExamplesGrid sections={exampleSections} /> });
   if (Playground) secs.push({ id: 'lab', label: 'Interactive Lab', heading: 'See it · try it', accent: 'green', body: <Playground /> });
-  if (Visual) secs.push({ id: 'picture', label: 'Picture It', heading: 'See the idea', accent: 'purple', body: <Visual /> });
   if (get('activity')) secs.push({ id: 'closer', label: 'Going Deeper', heading: 'A closer look', accent: 'teal', body: md(get('activity')) });
   if (get('demo')) secs.push({ id: 'practice', label: 'In the Wild', heading: 'Seeing it for real', accent: 'pink', body: md(get('demo')) });
   if (get('quiz')) secs.push({ id: 'quiz', label: 'Check Yourself', heading: 'Quiz yourself', accent: 'yellow', body: <ScoredQuiz body={get('quiz')!.body} /> });
