@@ -556,3 +556,13 @@ body {
   .difp-pe__arrow { transform: rotate(90deg); }
   .difp-vc__pc, .difp-vc__tools { grid-template-columns: 1fr; }
 }
+
+/* Animated flow along architecture-diagram arrows */
+@keyframes difp-flow-march { to { stroke-dashoffset: -20; } }
+.difp-flow-arrow { stroke-dasharray: 5 4; animation: difp-flow-march 0.8s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .difp-flow-arrow { animation: none; stroke-dasharray: none; } }
+
+/* RAG lab: sequential stage flow */
+.difp-rag__stage.cur { box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent); }
+@keyframes difp-rag-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+.difp-rag__stage.cur .difp-rag__sidx { animation: difp-rag-pulse 0.7s ease-in-out infinite; }

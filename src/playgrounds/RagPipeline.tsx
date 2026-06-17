@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import InteractiveLab from '../components/InteractiveLab';
 
 // A tiny "institutional handbook" the lab retrieves from.
@@ -30,13 +30,30 @@ function similarity(q: string, text: string): number {
   return hit / Math.sqrt(a.size * b.length);
 }
 
-const STAGES = ['Embed question', 'Retrieve top-k', 'Augment prompt', 'Generate answer'];
+const STAGES = ['Embed question', 'Search vectors', 'Retrieve top-k', 'Augment prompt', 'Generate answer'];
+const STEP_MS = 480;
 
 export default function RagPipeline() {
   const [qi, setQi] = useState(0);
-  const [ran, setRan] = useState(false);
+  const [active, setActive] = useState(-1); // current animated stage, -1 = idle
+  const [done, setDone] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const Q = QUESTIONS[qi];
+
+  const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
+  useEffect(() => clearTimers, []);
+
+  const reset = () => { clearTimers(); setActive(-1); setDone(false); setShowRaw(false); };
+
+  const run = () => {
+    clearTimers();
+    setDone(false);
+    setShowRaw(false);
+    STAGES.forEach((_, i) => timers.current.push(setTimeout(() => setActive(i), i * STEP_MS)));
+    timers.current.push(setTimeout(() => setDone(true), STAGES.length * STEP_MS));
+  };
+  const running = active >= 0 && !done;
 
   const ranked = useMemo(() => {
     return CORPUS.map((c) => ({ ...c, score: similarity(Q.q, c.text) }))
@@ -55,24 +72,26 @@ export default function RagPipeline() {
         <label>Pick a question</label>
         <div className="difp-rag__qs">
           {QUESTIONS.map((x, i) => (
-            <button key={i} className={i === qi ? 'is-active' : ''} onClick={() => { setQi(i); setRan(false); }}>{x.q}</button>
+            <button key={i} className={i === qi ? 'is-active' : ''} onClick={() => { setQi(i); reset(); }}>{x.q}</button>
           ))}
         </div>
       </div>
 
-      <button className="difp-btn" style={{ marginBottom: '1rem' }} onClick={() => setRan(true)}>Run retrieval →</button>
+      <button className="difp-btn" style={{ marginBottom: '1rem' }} onClick={run} disabled={running}>
+        {running ? 'Retrieving…' : done ? 'Run again ↺' : 'Run retrieval →'}
+      </button>
 
-      {/* pipeline stages */}
+      {/* pipeline stages — light up one by one */}
       <div className="difp-rag__stages">
         {STAGES.map((st, i) => (
-          <div key={st} className={`difp-rag__stage ${ran ? 'on' : ''}`}>
+          <div key={st} className={`difp-rag__stage ${i <= active ? 'on' : ''} ${i === active && !done ? 'cur' : ''}`}>
             <span className="difp-rag__sidx">{i + 1}</span>{st}
             {i < STAGES.length - 1 && <span className="difp-rag__sarrow" aria-hidden>→</span>}
           </div>
         ))}
       </div>
 
-      {ran && (
+      {done && (
         <>
           <div className="difp-sub" style={{ marginTop: '1.2rem' }}>Retrieved from the handbook</div>
           <div className="difp-rag__chunks">

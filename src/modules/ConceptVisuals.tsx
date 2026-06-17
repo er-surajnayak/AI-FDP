@@ -31,8 +31,8 @@ function ArrowDefs({ id, color = 'var(--text-faint)' }: { id: string; color?: st
     </defs>
   );
 }
-function Arrow({ x1, y1, x2, y2, m, color = 'var(--text-faint)', dash }: { x1: number; y1: number; x2: number; y2: number; m: string; color?: string; dash?: boolean }) {
-  return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={1.5} markerEnd={`url(#${m})`} strokeDasharray={dash ? '4 3' : undefined} />;
+function Arrow({ x1, y1, x2, y2, m, color = 'var(--text-faint)', dash, flow }: { x1: number; y1: number; x2: number; y2: number; m: string; color?: string; dash?: boolean; flow?: boolean }) {
+  return <line className={flow ? 'difp-flow-arrow' : undefined} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={1.5} markerEnd={`url(#${m})`} strokeDasharray={dash ? '4 3' : undefined} />;
 }
 function StageLabel({ x, y, text, c }: { x: number; y: number; text: string; c: string }) {
   return <text x={x} y={y} fontSize={9.5} style={{ fontFamily: 'var(--mono)', fill: c, fontWeight: 700 }}>{text}</text>;
@@ -286,21 +286,21 @@ function RagArchitecture() {
         <NBox x={118} y={36} w={86} h={34} label="Documents" c="var(--c-teal)" />
         <Arrow x1={204} y1={53} x2={224} y2={53} m={m} />
         <NBox x={224} y={36} w={104} h={34} label="Chunk + embed" c="var(--c-teal)" />
-        <Arrow x1={dbCx} y1={70} x2={dbCx} y2={y - 2} m={m} />
+        <Arrow x1={dbCx} y1={70} x2={dbCx} y2={y - 2} m={m} flow color="var(--c-teal)" />
 
         {/* query lane */}
         <StageLabel x={X.q} y={150} text="② ASK A QUESTION · online" c="var(--c-green)" />
         <NBox x={X.q} y={y} w={bw} h={bh} label="Question" c="var(--c-green)" />
-        <Arrow x1={X.q + bw} y1={y + bh / 2} x2={X.e} y2={y + bh / 2} m={m} />
+        <Arrow x1={X.q + bw} y1={y + bh / 2} x2={X.e} y2={y + bh / 2} m={m} flow color="var(--c-green)" />
         <NBox x={X.e} y={y} w={bw} h={bh} label="Embed" c="var(--c-green)" />
-        <Arrow x1={X.e + bw} y1={y + bh / 2} x2={X.db} y2={y + bh / 2} m={m} />
+        <Arrow x1={X.e + bw} y1={y + bh / 2} x2={X.db} y2={y + bh / 2} m={m} flow color="var(--c-green)" />
         <NBox x={X.db} y={y} w={bw} h={bh} label="Vector DB" sub="retrieve" c="var(--accent)" fill="color-mix(in srgb, var(--accent) 12%, var(--panel-bg-2))" />
-        <Arrow x1={X.db + bw} y1={y + bh / 2} x2={X.aug} y2={y + bh / 2} m={m} />
+        <Arrow x1={X.db + bw} y1={y + bh / 2} x2={X.aug} y2={y + bh / 2} m={m} flow color="var(--c-green)" />
         <text x={(X.db + bw + X.aug) / 2} y={y - 4} textAnchor="middle" fontSize={8.5} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>top-k chunks</text>
         <NBox x={X.aug} y={y} w={bw} h={bh} label="Augment" sub="+ prompt" c="var(--c-green)" />
-        <Arrow x1={X.aug + bw} y1={y + bh / 2} x2={X.llm} y2={y + bh / 2} m={m} />
+        <Arrow x1={X.aug + bw} y1={y + bh / 2} x2={X.llm} y2={y + bh / 2} m={m} flow color="var(--c-green)" />
         <NBox x={X.llm} y={y} w={bw} h={bh} label="LLM" c="var(--c-green)" />
-        <Arrow x1={X.llm + bw} y1={y + bh / 2} x2={X.ans} y2={y + bh / 2} m={m} />
+        <Arrow x1={X.llm + bw} y1={y + bh / 2} x2={X.ans} y2={y + bh / 2} m={m} flow color="var(--c-green)" />
         <NBox x={X.ans} y={y} w={bw} h={bh} label="Answer" sub="+ source" c="var(--c-green)" />
       </svg>
     </Figure>
