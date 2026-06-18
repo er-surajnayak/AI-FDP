@@ -395,8 +395,39 @@ function LoraArchitecture() {
   );
 }
 
+/* ── Day 4 · M2 — the evaluation gauntlet (7 stages) ───────────────────── */
+function EvalStages() {
+  const stages = [
+    { n: 1, name: 'Language ability', q: 'Does it read like language?', metrics: ['Perplexity'], c: 'var(--c-blue)' },
+    { n: 2, name: 'Correctness', q: 'Are the answers right?', metrics: ['Accuracy', 'Precision', 'Recall', 'F1'], c: 'var(--c-teal)' },
+    { n: 3, name: 'Generation quality', q: 'Does the text match the ideal?', metrics: ['BLEU', 'ROUGE', 'METEOR', 'BERTScore'], c: 'var(--c-purple)' },
+    { n: 4, name: 'Meaning quality', q: 'Does it mean the same thing?', metrics: ['Semantic similarity', 'Exact match'], c: 'var(--c-pink)' },
+    { n: 5, name: 'RAG evaluation', q: 'Did it answer from the documents?', metrics: ['Faithfulness', 'Context precision', 'Context recall', 'Answer relevancy'], c: 'var(--c-green)' },
+    { n: 6, name: 'Safety', q: 'Is it inventing facts or being unsafe?', metrics: ['Hallucination rate', 'Toxicity'], c: 'var(--c-yellow)' },
+    { n: 7, name: 'Human judgment', q: 'Would a real user actually like it?', metrics: ['Human evaluation'], c: 'var(--c-blue)' },
+  ];
+  return (
+    <Figure caption="Evaluation isn’t one number — it’s a gauntlet. An answer runs through stages, from “does it read like language?” to “would a human actually like it?”. Each stage asks a different question with its own metrics; the six that matter most for RAG and fine-tuning live in stages 5–7.">
+      <div className="difp-evs">
+        <div className="difp-evs__cap difp-evs__cap--top">Model output</div>
+        {stages.map((s) => (
+          <div key={s.n} className="difp-evs__row" style={{ ['--sc' as string]: s.c }}>
+            <span className="difp-evs__num">{s.n}</span>
+            <div className="difp-evs__body">
+              <div className="difp-evs__title">{s.name} <span className="difp-evs__q">— {s.q}</span></div>
+              <div className="difp-evs__metrics">{s.metrics.map((mm) => <span key={mm} className="difp-evs__chip">{mm}</span>)}</div>
+            </div>
+          </div>
+        ))}
+        <div className="difp-evs__cap difp-evs__cap--end">Ready to ship ✓</div>
+      </div>
+    </Figure>
+  );
+}
+
 export const CONCEPT_VISUALS: Record<string, () => JSX.Element> = {
   'day4-module-1-lora': LoraArchitecture,
+  'day4-module-2-evaluation': EvalStages,
   'module-1-evolution': NestingVisual,
   'module-2-transformers': SequentialVsParallel,
   'module-3-attention': CoreferenceAmbiguity,

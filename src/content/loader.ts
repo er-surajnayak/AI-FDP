@@ -106,6 +106,12 @@ const DEFS: ModuleDef[] = [
     topics: ['Frozen weights', 'ΔW = A·B', 'Adapters · rank'],
   },
   {
+    slug: 'day4-module-2-evaluation', day: 4, navLabel: 'Evaluating LLMs', title: 'Evaluating LLMs',
+    number: '02', durationMin: 50, kind: 'module', file: 'day4-module-2-evaluation.md', playground: 'eval-metrics',
+    blurb: 'How to grade a model — perplexity, precision/recall, BLEU to BERTScore, and the metrics that matter for RAG.',
+    topics: ['Precision · recall · F1', 'BLEU → BERTScore', 'Faithfulness · relevancy'],
+  },
+  {
     slug: 'overview', day: 1, navLabel: 'Day 1 Overview', title: 'Day 1 — From Deep Learning to LLMs',
     durationMin: 360, kind: 'overview', file: '00-overview.md',
     blurb: 'The framing, objectives, and narrative arc for the whole day.',

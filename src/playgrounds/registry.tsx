@@ -11,6 +11,7 @@ import VibeCoding from './VibeCoding';
 import RagPipeline from './RagPipeline';
 import VectorSearch from './VectorSearch';
 import LoraExplorer from './LoraExplorer';
+import EvalMetrics from './EvalMetrics';
 
 export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
   'evolution-timeline': EvolutionTimeline,
@@ -31,4 +32,5 @@ export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
   'rag-pipeline': RagPipeline,
   'vector-search': VectorSearch,
   'lora-explorer': LoraExplorer,
+  'eval-metrics': EvalMetrics,
 };

@@ -588,3 +588,38 @@ body {
 .difp-lora__a { font-family: var(--sans); font-size: 0.95rem; color: var(--text); border-left: 3px solid var(--c-pink); padding-left: 0.6rem; transition: border-color 0.3s ease; }
 .difp-lora__a.good { border-left-color: var(--c-green); }
 .difp-lora__tick { font-family: var(--mono); font-size: 0.74rem; color: var(--c-green); }
+
+/* Evaluation Metrics lab */
+.difp-ev__bar { display: inline-block; height: 0.6rem; background: var(--panel-bg-2); border-radius: 4px; overflow: hidden; }
+.difp-ev__bar span { display: block; height: 100%; transition: width 0.2s ease; }
+.difp-ev__cols { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: center; margin-top: 0.8rem; }
+.difp-ev__cm { border-collapse: collapse; font-family: var(--mono); }
+.difp-ev__cm td { border: 1px solid var(--border); width: 5.4rem; height: 2.7rem; text-align: center; font-size: 1.1rem; font-weight: 700; color: var(--text); position: relative; }
+.difp-ev__cm td span { display: block; font-size: 0.56rem; font-weight: 400; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.difp-ev__cmh { background: none !important; border: none !important; font-size: 0.66rem !important; font-weight: 400 !important; color: var(--text-faint) !important; text-transform: uppercase; letter-spacing: 0.04em; }
+.difp-ev__cm--tp { background: color-mix(in srgb, var(--c-green) 16%, transparent); }
+.difp-ev__cm--tn { background: color-mix(in srgb, var(--c-green) 16%, transparent); }
+.difp-ev__cm--fp { background: color-mix(in srgb, var(--c-pink) 16%, transparent); }
+.difp-ev__cm--fn { background: color-mix(in srgb, var(--c-pink) 16%, transparent); }
+.difp-ev__metrics { display: flex; flex-direction: column; gap: 0.45rem; min-width: 13rem; }
+.difp-ev__mrow { display: grid; grid-template-columns: 7rem 1fr 2.6rem; gap: 0.6rem; align-items: center; }
+.difp-ev__mrow > span { font-family: var(--sans); font-size: 0.82rem; color: var(--text-dim); line-height: 1.15; }
+.difp-ev__mrow > span i { font-family: var(--mono); font-size: 0.66rem; color: var(--text-faint); font-style: normal; }
+.difp-ev__mrow .difp-ev__bar { width: 100%; height: 0.7rem; }
+.difp-ev__mrow b { font-family: var(--mono); font-size: 0.84rem; color: var(--text); text-align: right; }
+.difp-ev__pair { display: flex; flex-direction: column; gap: 0.35rem; background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.92rem; color: var(--text); }
+.difp-ev__plabel { font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-right: 0.4rem; }
+
+/* Evaluation stages diagram */
+.difp-evs { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 0.4rem; }
+.difp-evs__cap { font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); padding: 0.2rem 0 0.2rem 2.4rem; }
+.difp-evs__cap--end { color: var(--c-green); font-weight: 700; }
+.difp-evs__row { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.5rem 0; position: relative; }
+.difp-evs__row::before { content: ''; position: absolute; left: 0.85rem; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.difp-evs__num { position: relative; z-index: 1; flex: none; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 50%; background: var(--sc); color: #161616; font-family: var(--mono); font-weight: 700; font-size: 0.85rem; }
+.difp-evs__body { padding-top: 0.05rem; }
+.difp-evs__title { font-family: var(--sans); font-weight: 600; font-size: 0.92rem; color: var(--text); margin-bottom: 0.35rem; }
+.difp-evs__q { font-weight: 400; color: var(--text-faint); font-size: 0.82rem; }
+.difp-evs__metrics { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.difp-evs__chip { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); border: 1px solid var(--border); border-left: 2px solid var(--sc); border-radius: 4px; padding: 0.1rem 0.4rem; }
+@media (max-width: 671px) { .difp-ev__cols { grid-template-columns: 1fr; } }

@@ -12,7 +12,8 @@ export type PlaygroundKey =
   | 'vibe-coding'
   | 'rag-pipeline'
   | 'vector-search'
-  | 'lora-explorer';
+  | 'lora-explorer'
+  | 'eval-metrics';
 
 export type ModuleKind = 'overview' | 'module' | 'doc';
 
