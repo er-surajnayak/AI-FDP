@@ -350,7 +350,53 @@ function VectorDbArchitecture() {
   );
 }
 
+/* ── Day 4 · M1 — how LoRA works (frozen W + trainable A·B) ─────────────── */
+function LoraArchitecture() {
+  const m = 'cv-lora';
+  return (
+    <Figure caption="LoRA freezes the giant pretrained weight and learns a tiny pair of matrices beside it. Their product ΔW = B·A is the 'correction', added back as W′ = W + ΔW — so a fraction of a percent of the parameters does all the learning.">
+      <svg viewBox="0 0 620 290" width="100%" role="img" aria-label="LoRA: a frozen pretrained weight plus a small trainable low-rank adapter">
+        <ArrowDefs id={m} />
+        {/* progression */}
+        <g>
+          <text x={150} y={22} textAnchor="middle" fontSize={10} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>Full fine-tuning</text>
+          <text x={262} y={22} textAnchor="middle" fontSize={11} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>›</text>
+          <text x={318} y={22} textAnchor="middle" fontSize={10} style={{ fontFamily: 'var(--mono)', fontWeight: 700, fill: 'var(--accent)' }}>LoRA</text>
+          <text x={358} y={22} textAnchor="middle" fontSize={11} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>›</text>
+          <text x={408} y={22} textAnchor="middle" fontSize={10} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>QLoRA</text>
+        </g>
+
+        <NBox x={14} y={128} w={68} h={44} label="input x" c="var(--c-teal)" />
+        <Arrow x1={82} y1={150} x2={163} y2={92} m={m} />
+        <Arrow x1={82} y1={150} x2={163} y2={199} m={m} />
+
+        {/* frozen W */}
+        <NBox x={165} y={56} w={240} h={60} label="Pretrained weight  W  ❄" sub="d × d · frozen" c="var(--c-blue)" />
+        <text x={285} y={132} textAnchor="middle" fontSize={9} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-faint)' }}>16,000,000 params — never change</text>
+
+        {/* trainable A·B */}
+        <NBox x={165} y={176} w={104} h={46} label="A  (d×r)" c="var(--c-green)" fill="color-mix(in srgb, var(--c-green) 12%, var(--panel-bg-2))" />
+        <Arrow x1={269} y1={199} x2={300} y2={199} m={m} flow color="var(--c-green)" />
+        <NBox x={300} y={176} w={104} h={46} label="B  (r×d)" c="var(--c-green)" fill="color-mix(in srgb, var(--c-green) 12%, var(--panel-bg-2))" />
+        <text x={352} y={238} textAnchor="middle" fontSize={9} style={{ fontFamily: 'var(--mono)', fontWeight: 700, fill: 'var(--c-green)' }}>65,536 params — trainable</text>
+
+        {/* merge */}
+        <Arrow x1={405} y1={86} x2={455} y2={128} m={m} />
+        <Arrow x1={404} y1={199} x2={456} y2={152} m={m} flow color="var(--c-green)" />
+        <circle cx={472} cy={140} r={17} style={{ fill: 'var(--panel-bg-2)', stroke: 'var(--accent)', strokeWidth: 1.5 }} />
+        <text x={472} y={145} textAnchor="middle" fontSize={16} style={{ fontFamily: 'var(--sans)', fontWeight: 700, fill: 'var(--text)' }}>+</text>
+        <text x={472} y={108} textAnchor="middle" fontSize={9.5} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-dim)' }}>W′ = W + ΔW</text>
+        <text x={300} y={266} textAnchor="middle" fontSize={9.5} style={{ fontFamily: 'var(--mono)', fill: 'var(--text-dim)' }}>ΔW = B × A   (a small, low-rank correction)</text>
+
+        <Arrow x1={489} y1={140} x2={520} y2={140} m={m} />
+        <NBox x={522} y={118} w={84} h={44} label="output" c="var(--c-blue)" />
+      </svg>
+    </Figure>
+  );
+}
+
 export const CONCEPT_VISUALS: Record<string, () => JSX.Element> = {
+  'day4-module-1-lora': LoraArchitecture,
   'module-1-evolution': NestingVisual,
   'module-2-transformers': SequentialVsParallel,
   'module-3-attention': CoreferenceAmbiguity,

@@ -566,3 +566,25 @@ body {
 .difp-rag__stage.cur { box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent); }
 @keyframes difp-rag-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
 .difp-rag__stage.cur .difp-rag__sidx { animation: difp-rag-pulse 0.7s ease-in-out infinite; }
+
+/* LoRA Explorer lab */
+.difp-lora__bars { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.4rem 0 0.8rem; }
+.difp-lora__barrow { display: grid; grid-template-columns: 8.5rem 1fr 4rem; gap: 0.7rem; align-items: center; }
+.difp-lora__blabel { font-family: var(--sans); font-size: 0.84rem; color: var(--text-dim); }
+.difp-lora__bar { height: 0.85rem; background: var(--panel-bg-2); border-radius: 4px; overflow: hidden; }
+.difp-lora__bar span { display: block; height: 100%; transition: width 0.25s ease; }
+.difp-lora__bval { font-family: var(--mono); font-size: 0.82rem; color: var(--text); text-align: right; }
+.difp-lora__stat { display: flex; flex-wrap: wrap; gap: 1.6rem; padding: 0.8rem 0; border-top: 1px solid var(--border); }
+.difp-lora__stat > div { display: flex; flex-direction: column; }
+.difp-lora__stat b { font-family: var(--serif); font-size: 1.7rem; color: var(--c-green); line-height: 1; }
+.difp-lora__stat span { font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+.difp-lora__train { border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 0.9rem; background: var(--panel-bg); }
+.difp-lora__epoch { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+.difp-lora__loss { color: var(--c-yellow); }
+.difp-lora__lossbar { height: 0.5rem; background: var(--panel-bg-2); border-radius: 3px; overflow: hidden; margin-bottom: 0.7rem; }
+.difp-lora__lossbar span { display: block; height: 100%; background: var(--c-yellow); transition: width 0.5s ease; }
+.difp-lora__q { font-family: var(--mono); font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.3rem; }
+.difp-lora__a { font-family: var(--sans); font-size: 0.95rem; color: var(--text); border-left: 3px solid var(--c-pink); padding-left: 0.6rem; transition: border-color 0.3s ease; }
+.difp-lora__a.good { border-left-color: var(--c-green); }
+.difp-lora__tick { font-family: var(--mono); font-size: 0.74rem; color: var(--c-green); }

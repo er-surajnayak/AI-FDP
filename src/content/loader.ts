@@ -100,6 +100,12 @@ const DEFS: ModuleDef[] = [
     topics: ['Similarity search', 'ANN / HNSW', 'Pinecone · pgvector'],
   },
   {
+    slug: 'day4-module-1-lora', day: 4, navLabel: 'LoRA Fine-Tuning', title: 'Fine-Tuning with LoRA',
+    number: '01', durationMin: 55, kind: 'module', file: 'day4-module-1-lora.md', playground: 'lora-explorer',
+    blurb: 'Teach a model new knowledge by training a tiny adapter — not the whole 1.1B-parameter model.',
+    topics: ['Frozen weights', 'ΔW = A·B', 'Adapters · rank'],
+  },
+  {
     slug: 'overview', day: 1, navLabel: 'Day 1 Overview', title: 'Day 1 — From Deep Learning to LLMs',
     durationMin: 360, kind: 'overview', file: '00-overview.md',
     blurb: 'The framing, objectives, and narrative arc for the whole day.',
@@ -143,7 +149,7 @@ export const DAYS: DayMeta[] = [
   { day: 1, title: 'From Deep Learning to LLMs', subtitle: 'Foundations of Generative AI', status: 'live' },
   { day: 2, title: 'Prompting, Vibe Coding & RAG', subtitle: 'Getting real work done with LLMs', status: 'live' },
   { day: 3, title: 'Agents & Building with LLMs', subtitle: 'From chat to autonomous workflows', status: 'coming-soon' },
-  { day: 4, title: 'Responsible & Institutional AI', subtitle: 'Ethics, governance, and rollout', status: 'coming-soon' },
+  { day: 4, title: 'Fine-Tuning & Customizing LLMs', subtitle: 'Teaching a model your own knowledge — LoRA & QLoRA', status: 'live' },
 ];
 
 export const CORE_MODULES = MODULES.filter((m) => m.kind === 'module');

@@ -11,7 +11,8 @@ export type PlaygroundKey =
   | 'prompt-explorer'
   | 'vibe-coding'
   | 'rag-pipeline'
-  | 'vector-search';
+  | 'vector-search'
+  | 'lora-explorer';
 
 export type ModuleKind = 'overview' | 'module' | 'doc';
 

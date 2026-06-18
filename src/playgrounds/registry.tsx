@@ -10,6 +10,7 @@ import PromptExplorer from './PromptExplorer';
 import VibeCoding from './VibeCoding';
 import RagPipeline from './RagPipeline';
 import VectorSearch from './VectorSearch';
+import LoraExplorer from './LoraExplorer';
 
 export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
   'evolution-timeline': EvolutionTimeline,
@@ -29,4 +30,5 @@ export const PLAYGROUNDS: Record<PlaygroundKey, () => JSX.Element> = {
   'vibe-coding': VibeCoding,
   'rag-pipeline': RagPipeline,
   'vector-search': VectorSearch,
+  'lora-explorer': LoraExplorer,
 };
